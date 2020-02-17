@@ -26,12 +26,12 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    /* canActivate: [UserOutGuard], */
+    canActivate: [UserOutGuard],
     children: [
       {
         path: 'information',
         component: InformationComponent,
-        /* canActivate: [UserOutGuard] */
+        canActivate: [UserOutGuard]
       },
       {
         path: '',
@@ -41,27 +41,27 @@ const routes: Routes = [
       {
         path: 'setting',
         component: SettingsComponent,
-        /* canActivate: [UserOutGuard], */
+        canActivate: [UserOutGuard]
       },
       {
         path: 'catalogue/cars',
         component: CatalogueCarsComponent,
-        /* canActivate: [UserOutGuard], */
+        canActivate: [UserOutGuard]
       },
       {
         path: 'catalogue/user',
         component: CatalogueUserComponent,
-        /* canActivate: [UserOutGuard], */
+        canActivate: [UserOutGuard]
       },
       {
         path: 'catalogue/part',
         component: CataloguePartsComponent,
-        /* canActivate: [UserOutGuard], */
+        canActivate: [UserOutGuard]
       },
       {
         path: 'sales',
         component: SalesComponent,
-        /* canActivate: [UserOutGuard], */
+        canActivate: [UserOutGuard]
       },
       {
         path: '**',
