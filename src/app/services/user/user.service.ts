@@ -62,7 +62,7 @@ export class UserService {
   }
 
   readUser(): Observable<User[]> {
-    return this.http.get<User[]>(environment.API_BASE + '', {
+    return this.http.get<User[]>(environment.API_BASE + '/user', {
       headers: this.headers
     });
   }

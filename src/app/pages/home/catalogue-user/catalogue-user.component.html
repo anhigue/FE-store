@@ -1,1 +1,23 @@
-<p>catalogue-user works!</p>
+<button class="btn btn-info" >Crear Usuario</button>
+
+<br>
+<br>
+
+<table class="table">
+    <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Nombre de usuario</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.username}}</td>
+        <td><button class="btn btn-warning">Editar</button></td>
+        <td><button class="btn btn-danger">Eliminar</button></td>
+    </tr>
+</table>
