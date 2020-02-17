@@ -55,8 +55,8 @@ export class UserService {
     this.route.navigateByUrl('/login');
   }
 
-  createUser(User: User): Observable<boolean> {
-    return this.http.post<boolean>(environment.API_BASE + '', User, {
+  createUser(User: User): Observable<User> {
+    return this.http.post<User>(environment.API_BASE + '/signin', User, {
       headers: this.headers
     });
   }
@@ -68,19 +68,19 @@ export class UserService {
   }
 
   readUserById(UserId: number): Observable<User> {
-    return this.http.get<User>(environment.API_BASE + '' + UserId, {
+    return this.http.get<User>(environment.API_BASE + '/user/' + UserId, {
       headers: this.headers
     });
   }
 
   updateUser(User: User): Observable<User> {
-    return this.http.post<User>(environment.API_BASE + '', User, {
+    return this.http.put<User>(environment.API_BASE + '/user', User, {
       headers: this.headers
     });
   }
 
-  deleteUser(User: User): Observable<boolean> {
-    return this.http.post<boolean>(environment.API_BASE + '', User, {
+  deleteUser(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(environment.API_BASE + '/user/' + id, {
       headers: this.headers
     });
   }

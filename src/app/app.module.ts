@@ -12,6 +12,8 @@ import { MaterialModule } from './material-module';
 import { HomeModule } from './pages/home/home.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { CreateComponent } from './pages/home/catalogue-user/create/create.component';
+import { UpdateUserComponent } from './pages/home/catalogue-user/update-user/update-user.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     LoginComponent,
     Error404Component,
+    CreateComponent,
+    UpdateUserComponent
   ],
   imports: [
     BrowserModule,
