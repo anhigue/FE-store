@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { UserInterface } from '../../../interfaces/UserInterface';
+import { User } from '../../../interfaces/UserInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +24,13 @@ export class UserService {
     );
   }
 
-  LogIn(User: UserInterface): Observable<UserInterface> {
-    return this.http.post<UserInterface>(environment.API_BASE + '', User, {
+  LogIn(User: User): Observable<User> {
+    return this.http.post<User>(environment.API_BASE + '/login', User, {
       headers: this.headers
     });
   }
 
-  setLogIn(User: UserInterface): void {
+  setLogIn(User: User): void {
     this.cookieService.set(environment.USER_KEY, JSON.stringify(User));
     this.route.navigateByUrl('home');
   }
@@ -55,31 +55,31 @@ export class UserService {
     this.route.navigateByUrl('/login');
   }
 
-  createUser(User: UserInterface): Observable<boolean> {
+  createUser(User: User): Observable<boolean> {
     return this.http.post<boolean>(environment.API_BASE + '', User, {
       headers: this.headers
     });
   }
 
-  readUser(): Observable<UserInterface[]> {
-    return this.http.get<UserInterface[]>(environment.API_BASE + '', {
+  readUser(): Observable<User[]> {
+    return this.http.get<User[]>(environment.API_BASE + '', {
       headers: this.headers
     });
   }
 
-  readUserById(UserId: number): Observable<UserInterface> {
-    return this.http.get<UserInterface>(environment.API_BASE + '' + UserId, {
+  readUserById(UserId: number): Observable<User> {
+    return this.http.get<User>(environment.API_BASE + '' + UserId, {
       headers: this.headers
     });
   }
 
-  updateUser(User: UserInterface): Observable<UserInterface> {
-    return this.http.post<UserInterface>(environment.API_BASE + '', User, {
+  updateUser(User: User): Observable<User> {
+    return this.http.post<User>(environment.API_BASE + '', User, {
       headers: this.headers
     });
   }
 
-  deleteUser(User: UserInterface): Observable<boolean> {
+  deleteUser(User: User): Observable<boolean> {
     return this.http.post<boolean>(environment.API_BASE + '', User, {
       headers: this.headers
     });
