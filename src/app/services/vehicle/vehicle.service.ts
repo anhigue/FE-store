@@ -23,8 +23,8 @@ export class VehicleService {
     return this.http.post(environment.API_BASE + '', vehicle, {headers: this.headers});
   }
 
-  readVehicle(): Observable<VehicleInterface> {
-    return this.http.get<VehicleInterface>(environment.API_BASE + '', { headers: this.headers});
+  readVehicle(): Observable<VehicleInterface[]> {
+    return this.http.get<VehicleInterface[]>(environment.API_BASE + '', { headers: this.headers});
   }
 
   updateVehicle(vehicle: VehicleInterface): Observable<any> {

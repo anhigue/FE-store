@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { DialogInterface } from '../../../interfaces/DialogInterface';
 
 @Component({
   selector: 'app-dialog-custom',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DialogCustomComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MatDialogRef<DialogCustomComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogInterface<any>,
+  ) {}
 
   ngOnInit() {
   }
