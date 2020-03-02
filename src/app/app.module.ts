@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CreateComponent } from './pages/home/catalogue-user/create/create.component';
 import { UpdateUserComponent } from './pages/home/catalogue-user/update-user/update-user.component';
+import { DialogCustomComponent } from './components/dialog-custom/dialog-custom.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { UpdateUserComponent } from './pages/home/catalogue-user/update-user/upd
     LoginComponent,
     Error404Component,
     CreateComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
+    DialogCustomComponent
   ],
   imports: [
     BrowserModule,
