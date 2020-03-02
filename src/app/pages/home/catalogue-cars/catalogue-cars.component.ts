@@ -6,6 +6,7 @@ import { VehicleInterface } from '../../../../interfaces/VehicleInterface';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { VehicleComponent } from 'src/app/components/vehicle/vehicle.component';
+import { DialogCustomComponent } from 'src/app/components/dialog-custom/dialog-custom.component';
 
 @Component({
   selector: 'app-catalogue-cars',
@@ -109,12 +110,34 @@ export class CatalogueCarsComponent implements OnInit {
   wantEdit(vahicle: any) {
     try {
       this._DIALOG_SERVICE.shareData = vahicle;
-      this._DIALOG_SERVICE.openDialog(VehicleComponent).beforeClosed().subscribe( (value: VehicleInterface) => {
-        if (value) {
-          this.updateVehicle(value);
-        }
-      });
+      this._DIALOG_SERVICE
+        .openDialog(VehicleComponent)
+        .beforeClosed()
+        .subscribe((value: VehicleInterface) => {
+          if (value) {
+            this.updateVehicle(value);
+          }
+        });
+    } catch (error) {}
+  }
+
+  wantDelete(vehicle: VehicleInterface) {
+    try {
+      this._DIALOG_SERVICE.shareData = {
+        title: 'Eliminar un Vehiculo',
+        message: 'Estas seguro que quieres eliminar un vehiculo.',
+        data: {}
+      };
+      this._DIALOG_SERVICE
+        .openDialog(DialogCustomComponent)
+        .beforeClosed()
+        .subscribe((value: any) => {
+          if (value) {
+            this.deleteVehicle(vehicle);
+          }
+        });
     } catch (error) {
+
     }
   }
 }
