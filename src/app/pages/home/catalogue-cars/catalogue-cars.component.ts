@@ -89,7 +89,7 @@ export class CatalogueCarsComponent implements OnInit {
         universalCode: 'AAAA',
         brand: 'Ford',
         line: 'Escape',
-        year: new Date()
+        year: 2020
       });
 
       this.dataSource = new MatTableDataSource<VehicleInterface>(this.vehicles);
