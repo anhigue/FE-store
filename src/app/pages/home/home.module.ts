@@ -11,6 +11,12 @@ import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing/home-routing.module';
 import { CataloguePartsComponent } from './catalogue-parts/catalogue-parts.component';
 import { SalesComponent } from './sales/sales.component';
+import { DialogCustomComponent } from 'src/app/components/dialog-custom/dialog-custom.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { VehicleComponent } from '../../components/vehicle/vehicle.component';
+import { VehicleService } from '../../services/vehicle/vehicle.service';
+import { UserService } from '../../services/user/user.service';
+import { DialogService } from '../../services/dialog/dialog.service';
 
 @NgModule({
   declarations: [
@@ -19,14 +25,27 @@ import { SalesComponent } from './sales/sales.component';
     SettingsComponent,
     CatalogueUserComponent,
     CataloguePartsComponent,
-    SalesComponent
+    SalesComponent,
+    DialogCustomComponent,
+    VehicleComponent
   ],
   imports: [
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
     HomeRoutingModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule
+  ],
+  entryComponents: [
+    DialogCustomComponent,
+    VehicleComponent
+  ],
+  providers: [
+    VehicleService,
+    UserService,
+    DialogService
   ],
   bootstrap: [HomeComponent]
 })

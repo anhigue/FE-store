@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material-module';
 import { HomeModule } from './pages/home/home.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateComponent } from './pages/home/catalogue-user/create/create.component';
 import { UpdateUserComponent } from './pages/home/catalogue-user/update-user/update-user.component';
 
@@ -22,7 +22,7 @@ import { UpdateUserComponent } from './pages/home/catalogue-user/update-user/upd
     LoginComponent,
     Error404Component,
     CreateComponent,
-    UpdateUserComponent
+    UpdateUserComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +31,8 @@ import { UpdateUserComponent } from './pages/home/catalogue-user/update-user/upd
     HttpClientModule,
     MaterialModule,
     HomeModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     CookieService
