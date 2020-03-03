@@ -20,19 +20,19 @@ export class VehicleService {
   }
 
   newVehicle(vehicle: VehicleInterface): Observable<any> {
-    return this.http.post(environment.API_BASE + '', vehicle, {headers: this.headers});
+    return this.http.post(environment.API_BASE + '/vehicle', vehicle, {headers: this.headers});
   }
 
   readVehicle(): Observable<VehicleInterface[]> {
-    return this.http.get<VehicleInterface[]>(environment.API_BASE + '', { headers: this.headers});
+    return this.http.get<VehicleInterface[]>(environment.API_BASE + '/vehicle', { headers: this.headers});
   }
 
   updateVehicle(vehicle: VehicleInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', vehicle, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/vehicle', vehicle, {headers: this.headers});
   }
 
   deleteVehicle(vehicle: VehicleInterface): Observable<any> {
-    return this.http.post(environment.API_BASE + '', vehicle, {headers: this.headers});
+    return this.http.delete(environment.API_BASE + '/vehicle/' + vehicle.universalCode, {headers: this.headers});
   }
 
 }

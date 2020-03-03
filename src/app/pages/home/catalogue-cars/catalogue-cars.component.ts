@@ -56,7 +56,14 @@ export class CatalogueCarsComponent implements OnInit {
           .newVehicle(creatVehicle)
           .subscribe((values: any) => {
             if (values) {
+              this._DIALOG_SERVICE.shareData = {
+                title: 'Exitoso',
+                message: 'El vehiculo se ha agregado con exito',
+                data: {}
+              }
+              this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
               this.getVehicle();
+              this.validateFormVehicle.reset();
             }
           });
       } else {
@@ -76,14 +83,13 @@ export class CatalogueCarsComponent implements OnInit {
 
   public getVehicle(): void {
     try {
-      /* Descomenta esta linea para que te aparesca la data de la peticion */
-      /* this._VEHICLE_SERVICE.readVehicle().subscribe( (value: VehicleInterface[]) => {
+      this._VEHICLE_SERVICE.readVehicle().subscribe( (value: VehicleInterface[]) => {
         if (value) {
           this.vehicles = value;
           this.dataSource = new MatTableDataSource<VehicleInterface>(this.vehicles);
           this.dataSource.paginator = this.paginator;
         }
-      }); */
+      });
 
       this.vehicles.push({
         universalCode: 'AAAA',
