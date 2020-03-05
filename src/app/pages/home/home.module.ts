@@ -17,6 +17,8 @@ import { VehicleComponent } from '../../components/vehicle/vehicle.component';
 import { VehicleService } from '../../services/vehicle/vehicle.service';
 import { UserService } from '../../services/user/user.service';
 import { DialogService } from '../../services/dialog/dialog.service';
+import { SubsComponent } from '../../components/subs/subs.component';
+import { SubsDialogComponent } from '../../components/subs-dialog/subs-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { DialogService } from '../../services/dialog/dialog.service';
     CataloguePartsComponent,
     SalesComponent,
     DialogCustomComponent,
-    VehicleComponent
+    VehicleComponent,
+    SubsComponent,
+    SubsDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +44,9 @@ import { DialogService } from '../../services/dialog/dialog.service';
   ],
   entryComponents: [
     DialogCustomComponent,
-    VehicleComponent
+    VehicleComponent,
+    SubsComponent,
+    SubsDialogComponent,
   ],
   providers: [
     VehicleService,
