@@ -45,7 +45,11 @@ export class SubsComponent implements OnInit {
       this.dataSource = new MatTableDataSource<SubInterface>(this.subs);
       this.dataSource.paginator = this.paginator;
     } catch (error) {
-      this.errorMessage(error, 'Error', 'Error al obtener los datos de las subscripciones.');
+      this.errorMessage(
+        error,
+        'Error',
+        'Error al obtener los datos de las subscripciones.'
+      );
     }
   }
 
@@ -64,7 +68,11 @@ export class SubsComponent implements OnInit {
       this._DIALOG_SERVICE
         .openDialog(SubsDialogComponent)
         .beforeClosed()
-        .subscribe((value: SubInterface) => {});
+        .subscribe((value: SubInterface) => {
+          if (value) {
+            this.createSub(value);
+          }
+        });
     } catch (error) {
       this.errorMessage(error, 'Error', 'Error al crear');
     }
@@ -72,9 +80,96 @@ export class SubsComponent implements OnInit {
 
   private createSub(sub: SubInterface) {
     try {
-      console.log('');
+      this._SUB_SERVICE.newSub(sub).subscribe((value: any) => {
+        if (value) {
+          /* message success show here */
+          this.getSubs();
+        }
+      });
     } catch (error) {
-      this.errorMessage(error, 'Error', 'Error al crear un tipo de subscripcion');
+      this.errorMessage(
+        error,
+        'Error',
+        'Error al crear un tipo de subscripcion'
+      );
+    }
+  }
+
+  wantUpdate(sub: SubInterface) {
+    try {
+      this._DIALOG_SERVICE.shareData = sub;
+      this._DIALOG_SERVICE
+        .openDialog(SubsDialogComponent)
+        .beforeClosed()
+        .subscribe((value: SubInterface) => {
+          if (value) {
+            this.updateSub(value);
+          }
+        });
+    } catch (error) {
+      this.errorMessage(
+        error,
+        'Error',
+        'Error al actualizar un tipo de subscripcion'
+      );
+    }
+  }
+
+  private updateSub(Sub: SubInterface) {
+    try {
+      this._SUB_SERVICE.updateSub(Sub).subscribe((value: any) => {
+        if (value) {
+          /* message update here */
+          this.getSubs();
+        }
+      });
+    } catch (error) {
+      this.errorMessage(
+        error,
+        'Error',
+        'Error al actualizar un tipo de subscripcion'
+      );
+    }
+  }
+
+  wantDelete(sub: SubInterface) {
+    try {
+      this._DIALOG_SERVICE.shareData = {
+        title: 'Eliminar un tipo de suscripcion',
+        message: 'Estas seguro que quieres eliminar un tipo de suscripcion.',
+        data: {}
+      };
+      this._DIALOG_SERVICE
+        .openDialog(DialogCustomComponent)
+        .beforeClosed()
+        .subscribe((value: any) => {
+          if (value) {
+            this.deleteSub(sub);
+          }
+        });
+    } catch (error) {
+      this.errorMessage(
+        error,
+        'Error',
+        'Error al eliminar un tipo de subscripcion'
+      );
+    }
+  }
+
+  private deleteSub(sub: SubInterface) {
+    try {
+      this._SUB_SERVICE.deleteSub(sub).subscribe((value: any) => {
+        if (value) {
+          /* message delete here */
+          this.getSubs();
+        }
+      });
+    } catch (error) {
+      this.errorMessage(
+        error,
+        'Error',
+        'Error al eliminar un tipo de subscripcion'
+      );
     }
   }
 }
