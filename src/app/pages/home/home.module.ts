@@ -22,6 +22,8 @@ import { SubsDialogComponent } from '../../components/subs-dialog/subs-dialog.co
 import { RolComponent } from '../../components/rol/rol.component';
 import { RolDialogComponent } from '../../components/rol-dialog/rol-dialog.component';
 import { RolService } from '../../services/rol/rol.service';
+import { ClientComponent } from '../../components/client/client.component';
+import { ClientDialogComponent } from '../../components/client-dialog/client-dialog.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { RolService } from '../../services/rol/rol.service';
     SubsDialogComponent,
     RolComponent,
     RolDialogComponent,
+    ClientComponent,
+    ClientDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +57,7 @@ import { RolService } from '../../services/rol/rol.service';
     SubsComponent,
     SubsDialogComponent,
     RolDialogComponent,
+    ClientDialogComponent,
   ],
   providers: [
     VehicleService,
