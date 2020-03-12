@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Opciones de Rol</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroupRol">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Id" type="text" required [(ngModel)]="rolUpdate.id"
+            formControlName="id"/>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Tipo" type="text" required [(ngModel)]="rolUpdate.name"
+            formControlName="name" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancelar</button>
+  <button mat-button [mat-dialog-close]="rolUpdate" *ngIf="formGroupRol.valid">
+    Ok.
+  </button>
+</mat-dialog-actions>

@@ -27,11 +27,11 @@ export class SubsService {
   }
 
   updateSub(sub: SubInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', sub, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '', sub, {headers: this.headers});
   }
 
   deleteSub(sub: SubInterface): Observable<any> {
-    return this.http.post(environment.API_BASE + '', sub, {headers: this.headers});
+    return this.http.delete(environment.API_BASE + '' + sub.id, {headers: this.headers});
   }
 
 }
