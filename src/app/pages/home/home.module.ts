@@ -24,6 +24,11 @@ import { RolDialogComponent } from '../../components/rol-dialog/rol-dialog.compo
 import { RolService } from '../../services/rol/rol.service';
 import { ClientComponent } from '../../components/client/client.component';
 import { ClientDialogComponent } from '../../components/client-dialog/client-dialog.component';
+import { ProductComponent } from '../../components/product/product.component';
+import { ProductDialogComponent } from '../../components/product-dialog/product-dialog.component';
+import { ProductVehicleDialogComponent } from '../../components/product-vehicle-dialog/product-vehicle-dialog.component';
+import { ProductStockDialogComponent } from '../../components/product-stock-dialog/product-stock-dialog.component';
+import { ProductService } from '../../services/product/product.service';
 
 @NgModule({
   declarations: [
@@ -41,6 +46,10 @@ import { ClientDialogComponent } from '../../components/client-dialog/client-dia
     RolDialogComponent,
     ClientComponent,
     ClientDialogComponent,
+    ProductComponent,
+    ProductDialogComponent,
+    ProductVehicleDialogComponent,
+    ProductStockDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -58,12 +67,16 @@ import { ClientDialogComponent } from '../../components/client-dialog/client-dia
     SubsDialogComponent,
     RolDialogComponent,
     ClientDialogComponent,
+    ProductDialogComponent,
+    ProductVehicleDialogComponent,
+    ProductStockDialogComponent,
   ],
   providers: [
     VehicleService,
     UserService,
     DialogService,
-    RolService
+    RolService,
+    ProductService,
   ],
   bootstrap: [HomeComponent]
 })
