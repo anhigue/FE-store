@@ -7,6 +7,8 @@ import { ProductService } from '../../services/product/product.service';
 import { DialogCustomComponent } from '../dialog-custom/dialog-custom.component';
 import { ProductDialogComponent } from '../product-dialog/product-dialog.component';
 import { ProductStockDialogComponent } from '../product-stock-dialog/product-stock-dialog.component';
+import { ProductVehicleDialogComponent } from '../product-vehicle-dialog/product-vehicle-dialog.component';
+import { ActionVehicleProductInterface } from '../../../interfaces/ActionVehicleProductInterface';
 
 @Component({
   selector: 'app-product',
@@ -49,7 +51,15 @@ export class ProductComponent implements OnInit {
       }); */
       this.products.push({
         id: 1,
-        name: 'Anibal Higueros'
+        name: 'Anibal Higueros',
+        vehicles: [
+          {
+            universalCode: 'AADDSSkS',
+            brand: 'Ford',
+            line: 'Escape',
+            year: 2002
+          }
+        ]
       });
       this.dataSource = new MatTableDataSource<ProductInterface>(this.products);
       this.dataSource.paginator = this.paginator;
@@ -57,7 +67,7 @@ export class ProductComponent implements OnInit {
       this.errorMessage(
         error,
         'Error',
-        'Error al obtener los datos de los productos.'
+        'Error al obtener los datos de los repuesto.'
       );
     }
   }
@@ -96,7 +106,7 @@ export class ProductComponent implements OnInit {
         }
       });
     } catch (error) {
-      this.errorMessage(error, 'Error', 'Error al crear un producto.');
+      this.errorMessage(error, 'Error', 'Error al crear un repuesto.');
     }
   }
 
@@ -112,7 +122,7 @@ export class ProductComponent implements OnInit {
           }
         });
     } catch (error) {
-      this.errorMessage(error, 'Error', 'Error al actualizar un producto.');
+      this.errorMessage(error, 'Error', 'Error al actualizar un repuesto.');
     }
   }
 
@@ -125,7 +135,7 @@ export class ProductComponent implements OnInit {
         }
       });
     } catch (error) {
-      this.errorMessage(error, 'Error', 'Error al actualizar un producto.');
+      this.errorMessage(error, 'Error', 'Error al actualizar un repuesto.');
     }
   }
 
@@ -133,7 +143,7 @@ export class ProductComponent implements OnInit {
     try {
       this._DIALOG_SERVICE.shareData = {
         title: 'Eliminar un Producto',
-        message: 'Estas seguro que quieres eliminar este producto.',
+        message: 'Estas seguro que quieres eliminar este repuesto.',
         data: {}
       };
       this._DIALOG_SERVICE
@@ -145,7 +155,7 @@ export class ProductComponent implements OnInit {
           }
         });
     } catch (error) {
-      this.errorMessage(error, 'Error', 'Error al eliminar un producto.');
+      this.errorMessage(error, 'Error', 'Error al eliminar un repuesto.');
     }
   }
 
@@ -158,7 +168,7 @@ export class ProductComponent implements OnInit {
         }
       });
     } catch (error) {
-      this.errorMessage(error, 'Error', 'Error al eliminar un producto.');
+      this.errorMessage(error, 'Error', 'Error al eliminar un repuesto.');
     }
   }
 
@@ -174,21 +184,94 @@ export class ProductComponent implements OnInit {
           }
         });
     } catch (error) {
-      this.errorMessage(error, 'Error', 'Error al actualizar el stock del producto.');
+      this.errorMessage(
+        error,
+        'Error',
+        'Error al actualizar el stock del repuesto.'
+      );
     }
   }
 
   private updateStockProduct(product: ProductInterface) {
     try {
-      this._PRODUCT_SERVICE.updateStockProduct(product).subscribe((value: any) => {
-        if (value) {
-          /* message update here */
-          this.getProduct();
-        }
-      });
+      this._PRODUCT_SERVICE
+        .updateStockProduct(product)
+        .subscribe((value: any) => {
+          if (value) {
+            /* message update here */
+            this.getProduct();
+          }
+        });
     } catch (error) {
-      this.errorMessage(error, 'Error', 'Error al actualizar un producto.');
+      this.errorMessage(error, 'Error', 'Error al actualizar un repuesto.');
     }
   }
 
+  wantUpdateVehicles(product: ProductInterface) {
+    try {
+      this._DIALOG_SERVICE.shareData = product;
+      this._DIALOG_SERVICE
+        .openDialog(ProductVehicleDialogComponent)
+        .beforeClosed()
+        .subscribe((value: ActionVehicleProductInterface) => {
+          if (value.type === 'delete') {
+            const deleteVehicle = {
+              id: product.id,
+              vehicleId: value.data.universalCode
+            };
+            this.UnAssignVehicle(deleteVehicle);
+          } else if (value.type === 'assign') {
+            const assignVehicle = {
+              id: product.id,
+              vehicleId: value.data.universalCode
+            };
+            this.assignVehicle(assignVehicle);
+          }
+        });
+    } catch (error) {
+      this.errorMessage(
+        error,
+        'Error',
+        'Error al interactuar con los vehiculos del repuesto.'
+      );
+    }
+  }
+
+  private assignVehicle(product: ProductInterface) {
+    try {
+      this._PRODUCT_SERVICE
+        .assignVehicleProduct(product)
+        .subscribe((value: any) => {
+          if (value) {
+            /* message success here */
+            this.getProduct();
+          }
+        });
+    } catch (error) {
+      this._DIALOG_SERVICE.errorMessage(
+        error,
+        'Error',
+        'Error al asignar un vehiculo al repuesto.'
+      );
+    }
+  }
+
+  private UnAssignVehicle(product: ProductInterface) {
+    try {
+      this._PRODUCT_SERVICE
+        .unAssignVehicleProduct(product)
+        .subscribe((value: any) => {
+          if (value) {
+            /* message success here */
+            this.getProduct();
+          }
+        });
+    } catch (error) {
+      this._DIALOG_SERVICE.errorMessage(
+        error,
+        'Error',
+        'Error al borrar un vehiculo al repuesto.'
+      );
+    }
+  }
 }

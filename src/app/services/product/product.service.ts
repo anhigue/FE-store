@@ -35,7 +35,7 @@ export class ProductService {
   }
 
   assignVehicleProduct(product: ProductInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', product, {headers: this.headers});
+    return this.http.post<any>(environment.API_BASE + '', product, {headers: this.headers});
   }
 
   unAssignVehicleProduct(product: ProductInterface): Observable<any> {
