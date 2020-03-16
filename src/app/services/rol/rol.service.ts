@@ -19,18 +19,18 @@ export class RolService {
   }
 
   newRol(rol: RolInterface): Observable<any> {
-    return this.http.post(environment.API_BASE + '', rol, {headers: this.headers});
+    return this.http.post(environment.API_BASE + '/rol', rol, {headers: this.headers});
   }
 
   readRol(): Observable<RolInterface[]> {
-    return this.http.get<RolInterface[]>(environment.API_BASE + '', { headers: this.headers});
+    return this.http.get<RolInterface[]>(environment.API_BASE + '/rol', { headers: this.headers});
   }
 
   updateRol(rol: RolInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', rol, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/rol', rol, {headers: this.headers});
   }
 
   deleteRol(rol: RolInterface): Observable<any> {
-    return this.http.delete(environment.API_BASE + '' + rol.id, {headers: this.headers});
+    return this.http.delete(environment.API_BASE + '/rol/' + rol.id, {headers: this.headers});
   }
 }

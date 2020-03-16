@@ -19,18 +19,18 @@ export class ClientService {
   }
 
   newClient(client: ClientInterface): Observable<any> {
-    return this.http.post(environment.API_BASE + '', client, {headers: this.headers});
+    return this.http.post(environment.API_BASE + '/client', client, {headers: this.headers});
   }
 
   readClient(): Observable<ClientInterface[]> {
-    return this.http.get<ClientInterface[]>(environment.API_BASE + '', { headers: this.headers});
+    return this.http.get<ClientInterface[]>(environment.API_BASE + '/client', { headers: this.headers});
   }
 
   updateClient(client: ClientInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', client, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/client', client, {headers: this.headers});
   }
 
   deleteClient(client: ClientInterface): Observable<any> {
-    return this.http.delete(environment.API_BASE + '' + client.id, {headers: this.headers});
+    return this.http.delete(environment.API_BASE + '/client/' + client.id, {headers: this.headers});
   }
 }
