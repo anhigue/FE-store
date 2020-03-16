@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +15,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private userService: UserService
   ) {
     this.getUrlTags();
   }
@@ -26,5 +28,10 @@ export class HomeComponent implements OnInit {
         this.url = event.url.split('/');
       }
     });
+  }
+  
+  logOut() {
+    console.log("Cerrando sesión!");
+    this.userService.Logout();
   }
 }

@@ -11,12 +11,14 @@ import { CatalogueUserComponent } from './pages/home/catalogue-user/catalogue-us
 import { Error404Component } from './pages/error404/error404.component';
 import { CataloguePartsComponent } from './pages/home/catalogue-parts/catalogue-parts.component';
 import { SalesComponent } from './pages/home/sales/sales.component';
+import { CreateComponent } from './pages/home/catalogue-user/create/create.component';
+import { UpdateUserComponent } from './pages/home/catalogue-user/update-user/update-user.component';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    canActivate: [ UserInGuard ]
+    /* canActivate: [ UserInGuard ] */
   },
   {
     path: '',
@@ -41,27 +43,37 @@ const routes: Routes = [
       {
         path: 'setting',
         component: SettingsComponent,
-        /* canActivate: [UserOutGuard], */
+        /* canActivate: [UserOutGuard] */
       },
       {
         path: 'catalogue/cars',
         component: CatalogueCarsComponent,
-        /* canActivate: [UserOutGuard], */
+        /* canActivate: [UserOutGuard] */
       },
       {
         path: 'catalogue/user',
         component: CatalogueUserComponent,
-        /* canActivate: [UserOutGuard], */
+        /* canActivate: [UserOutGuard] */
+      },
+      {
+        path: 'catalogue/user/create',
+        component: CreateComponent,
+        /* canActivate: [UserOutGuard] */
+      },
+      {
+        path: 'catalogue/user/update/:id',
+        component: UpdateUserComponent,
+        /* canActivate: [UserOutGuard] */
       },
       {
         path: 'catalogue/part',
         component: CataloguePartsComponent,
-        /* canActivate: [UserOutGuard], */
+        /* canActivate: [UserOutGuard] */
       },
       {
         path: 'sales',
         component: SalesComponent,
-        /* canActivate: [UserOutGuard], */
+        /* canActivate: [UserOutGuard] */
       },
       {
         path: '**',

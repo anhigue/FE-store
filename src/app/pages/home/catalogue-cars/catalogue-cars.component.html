@@ -1,1 +1,88 @@
-<p>catalogue-cars works!</p>
+<h5>Modulo de Vehiculos</h5>
+<small>Realiza todas las acciones posibles con los vehiculos</small>
+<hr>
+<mat-tab-group mat-align-tabs="start">
+  <mat-tab label="Listado de vehiculos">
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="universalCode">
+        <th mat-header-cell *matHeaderCellDef> Codigo Universal. </th>
+        <td mat-cell *matCellDef="let element"> {{element.universalCode}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="brand">
+        <th mat-header-cell *matHeaderCellDef> Marca </th>
+        <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="line">
+        <th mat-header-cell *matHeaderCellDef> Linea </th>
+        <td mat-cell *matCellDef="let element"> {{element.line}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="year">
+        <th mat-header-cell *matHeaderCellDef> Año </th>
+        <td mat-cell *matCellDef="let element"> {{element.year}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="options">
+        <th mat-header-cell *matHeaderCellDef> Opciones </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-menu #appMenuCoin="matMenu">
+            <ng-template matMenuContent>
+              <button mat-menu-item (click)="wantEdit(element);">Editar</button>
+              <button mat-menu-item (click)="wantDelete(element);">Eliminar</button>
+            </ng-template>
+          </mat-menu>
+          <button mat-icon-button [matMenuTriggerFor]="appMenuCoin">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+  </mat-tab>
+  <mat-tab label="Registro de vehiculos" >
+    <div class="content">
+      <form [formGroup]="validateFormVehicle" (ngSubmit)="createVehicle()">
+        <div class="row">
+          <div class="col-md-12">
+            <mat-form-field class="example-full-width">
+              <mat-label>Codigo Universal</mat-label>
+              <input matInput formControlName="universalCode" placeholder="AFEESS - 00012" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Marca</mat-label>
+              <input matInput formControlName="brand" placeholder="Ford" required>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Linea</mat-label>
+              <input matInput formControlName="line" placeholder="Escape" required>
+            </mat-form-field>
+          </div>
+          <div class="col-md-4">
+            <mat-form-field class="example-full-width">
+              <mat-label>Año</mat-label>
+              <input matInput formControlName="year" placeholder="Ford" required type="number" required>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button mat-button type="submit">Crear nuevo vehiculo</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-tab>
+</mat-tab-group>

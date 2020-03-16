@@ -1,0 +1,31 @@
+<a class="btn btn-info" [routerLink]="['../']">Cancelar</a>
+
+<br>
+<br>
+<form #f="ngForm" (ngSubmit)="createUser(f)">
+    <div class="form-group">
+        <div class="form-label-group">
+            <label for="inputEmail">Nombre</label>
+            <input type="text" name="firstname" ngModel #firstname="ngModel" class="form-control" placeholder="Nombre" required="required" autofocus="autofocus">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-label-group">
+            <label for="inputEmail">Apellido</label>
+            <input type="text" name="lastname" ngModel #lastname="ngModel" class="form-control" placeholder="Apellido" required="required" autofocus="autofocus">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-label-group">
+            <label for="inputEmail">Nombre de usuario</label>
+            <input type="text" name="username" ngModel #username="ngModel" class="form-control" placeholder="Correo" required="required" autofocus="autofocus">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-label-group">
+            <label for="inputPassword">Contraseña</label>
+            <input type="password" name="password" ngModel #password="ngModel" class="form-control" placeholder="Contraseña" required="required">
+        </div>
+    </div>
+    <button class="btn btn-primary btn-block">Crear usuario</button>
+</form>

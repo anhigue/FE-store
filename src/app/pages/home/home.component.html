@@ -25,7 +25,7 @@
           <ul class="nav">
             <li class="active">
               <a [routerLink]="['information']">
-                <i class="glyphicon glyphicon-home"></i> Información personal </a>
+                <i class="glyphicon glyphicon-home"></i> Información Clientes </a>
             </li>
             <li class="active">
               <a [routerLink]="['catalogue/part']">
@@ -36,16 +36,20 @@
                 <i class="glyphicon glyphicon-user"></i> Catalogo de vehiculos </a>
             </li>
             <li class="active">
-              <a [routerLink]="['catalogue/user']">
-                <i class="glyphicon glyphicon-flag"></i> Catalogo de Clientes </a>
-            </li>
-            <li class="active">
               <a [routerLink]="['sales']">
                 <i class="glyphicon glyphicon-flag"></i> Ventas de repuestos </a>
             </li>
             <li class="active">
               <a [routerLink]="['setting']">
                 <i class="glyphicon glyphicon-flag"></i> Administracion </a>
+            </li>
+            <li class="active">
+              <a [routerLink]="['catalogue/user']">
+                <i class="glyphicon glyphicon-flag"></i> Usuarios </a>
+            </li>
+            <li class="active">
+              <button (click)="logOut()">
+                <i class="glyphicon glyphicon-flag"></i> Cerrar Sesión </button>
             </li>
           </ul>
         </div>
