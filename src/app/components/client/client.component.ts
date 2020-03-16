@@ -70,12 +70,12 @@ export class ClientComponent implements OnInit {
           name: ''
         }
       };
-      this._DIALOG_SERVICE.shareData = {};
       this._DIALOG_SERVICE
         .openDialog(ClientDialogComponent)
         .beforeClosed()
         .subscribe((value: ClientInterface) => {
           if (value) {
+            value.subscription = null;
             this.createClient(value);
           }
         });
@@ -99,12 +99,14 @@ export class ClientComponent implements OnInit {
 
   wantUpdate(sub: ClientInterface) {
     try {
+      sub.subscriptionId = sub.subscription.id + "";
       this._DIALOG_SERVICE.shareData = sub;
       this._DIALOG_SERVICE
         .openDialog(ClientDialogComponent)
         .beforeClosed()
         .subscribe((value: ClientInterface) => {
           if (value) {
+            value.subscription = null;
             this.updateClient(value);
           }
         });
