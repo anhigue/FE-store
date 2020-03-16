@@ -29,6 +29,12 @@ import { ProductDialogComponent } from '../../components/product-dialog/product-
 import { ProductVehicleDialogComponent } from '../../components/product-vehicle-dialog/product-vehicle-dialog.component';
 import { ProductStockDialogComponent } from '../../components/product-stock-dialog/product-stock-dialog.component';
 import { ProductService } from '../../services/product/product.service';
+import { SaleComponent } from '../../components/sales/sales.component';
+import { SalesDialogComponent } from '../../components/sales-dialog/sales-dialog.component';
+import { SalesService } from '../../services/sales/sales.service';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { FilterPipeModule } from 'ngx-filter-pipe';
+import { SalesProductDialogComponent } from '../../components/sales-product-dialog/sales-product-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +56,9 @@ import { ProductService } from '../../services/product/product.service';
     ProductDialogComponent,
     ProductVehicleDialogComponent,
     ProductStockDialogComponent,
+    SaleComponent,
+    SalesDialogComponent,
+    SalesProductDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -58,7 +67,8 @@ import { ProductService } from '../../services/product/product.service';
     HomeRoutingModule,
     MaterialModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FilterPipeModule,
   ],
   entryComponents: [
     DialogCustomComponent,
@@ -70,6 +80,8 @@ import { ProductService } from '../../services/product/product.service';
     ProductDialogComponent,
     ProductVehicleDialogComponent,
     ProductStockDialogComponent,
+    SalesDialogComponent,
+    SalesProductDialogComponent,
   ],
   providers: [
     VehicleService,
@@ -77,6 +89,9 @@ import { ProductService } from '../../services/product/product.service';
     DialogService,
     RolService,
     ProductService,
+    SalesService,
+    { provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false } },
+    { provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true } }
   ],
   bootstrap: [HomeComponent]
 })

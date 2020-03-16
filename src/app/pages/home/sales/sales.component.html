@@ -1,1 +1,85 @@
-<p>sales works!</p>
+<h5>Modulo de Ventas</h5>
+<small>Realiza todas las acciones posibles con las ordenes de ventas</small>
+<hr>
+<mat-tab-group mat-align-tabs="start">
+  <mat-tab label="Listado de ventas">
+    <app-sale></app-sale>
+  </mat-tab>
+  <mat-tab label="Nueva venta">
+    <!-- process to create a new order sale -->
+    <mat-vertical-stepper [linear]="false" #stepper>
+      <mat-step [stepControl]="formGroupClient">
+        <form [formGroup]="formGroupClient">
+          <ng-template matStepLabel>Selecciona el cliente</ng-template>
+          <p>Selecciona un cliente a quien se le va a asignar esta orden de compra de repuestos.</p>
+          <mat-form-field>
+            <mat-label>Clientes</mat-label>
+            <mat-select>
+              <input type="text" class="form-control" placeholder="Buscar al cliente en la lista"
+                [(ngModel)]="filter.name" [ngModelOptions]="{standalone: true}">
+              <mat-option> - </mat-option>
+              <mat-option *ngFor="let item of client | filterBy: filter" [value]="item">
+                {{item.name}} / {{ item.email }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <hr>
+          <button mat-button matStepperNext>Siguiente</button>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Agregar los repuestos a la orden</ng-template>
+        <button (click)="wantAddProductList();" class="btn btn-success btn-block">Agregar un repuesto a la lista</button>
+        <table mat-table [dataSource]="dataSource">
+
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Nombre </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Descripcion </th>
+            <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="partNo">
+            <th mat-header-cell *matHeaderCellDef> No. Parte</th>
+            <td mat-cell *matCellDef="let element"> {{element.partNo}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="price">
+            <th mat-header-cell *matHeaderCellDef> Precio </th>
+            <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef> Opciones </th>
+            <td mat-cell *matCellDef="let element">
+              <mat-menu #appMenuCoin="matMenu">
+                <ng-template matMenuContent>
+                  <button mat-menu-item (click)="removeProductList(element)">Eliminar</button>
+                </ng-template>
+              </mat-menu>
+              <button mat-icon-button [matMenuTriggerFor]="appMenuCoin">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        <button mat-button matStepperNext>Siguiente</button>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Terminar</ng-template>
+        <p>Haz terminado de crear una orden de compra de repuestos.</p>
+        <hr>
+        <div>
+          <button mat-button matStepperPrevious>Regresar</button>
+          <button mat-button (click)="wantSave();">Guardar</button>
+        </div>
+      </mat-step>
+    </mat-vertical-stepper>
+  </mat-tab>
+</mat-tab-group>
