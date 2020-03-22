@@ -49,6 +49,9 @@ import { StateRequestService } from '../../services/state/state-request.service'
 import { LineComponent } from '../../components/line/line.component';
 import { BrandDialogComponent } from '../../components/brand-dialog/brand-dialog.component';
 import { LineDialogComponent } from '../../components/line-dialog/line-dialog.component';
+import { FactoryService } from '../../services/factory/factory.service';
+import { FactoryComponent } from '../../components/factory/factory.component';
+import { FactoryDialogComponent } from '../../components/factory-dialog/factory-dialog.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +85,8 @@ import { LineDialogComponent } from '../../components/line-dialog/line-dialog.co
     LineComponent,
     BrandDialogComponent,
     LineDialogComponent,
+    FactoryComponent,
+    FactoryDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -110,6 +115,8 @@ import { LineDialogComponent } from '../../components/line-dialog/line-dialog.co
     BrandComponent,
     BrandDialogComponent,
     LineDialogComponent,
+    FactoryComponent,
+    FactoryDialogComponent,
   ],
   providers: [
     VehicleService,
@@ -124,7 +131,8 @@ import { LineDialogComponent } from '../../components/line-dialog/line-dialog.co
     BrandService,
     LineService,
     StateOrderService,
-    StateRequestService
+    StateRequestService,
+    FactoryService
   ],
   bootstrap: [HomeComponent]
 })
