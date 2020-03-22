@@ -38,6 +38,9 @@ import { SalesProductDialogComponent } from '../../components/sales-product-dial
 import { AdminBillComponent } from './admin-bill/admin-bill.component';
 import { BillComponent } from '../../components/bill/bill.component';
 import { BillService } from '../../services/bill/bill.service';
+import { StateOrderComponent } from '../../components/state-order/state-order.component';
+import { StateRequestComponent } from '../../components/state-request/state-request.component';
+import { StateDialogComponent } from '../../components/state-dialog/state-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,9 @@ import { BillService } from '../../services/bill/bill.service';
     SalesProductDialogComponent,
     AdminBillComponent,
     BillComponent,
+    StateOrderComponent,
+    StateRequestComponent,
+    StateDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -88,6 +94,7 @@ import { BillService } from '../../services/bill/bill.service';
     SalesDialogComponent,
     SalesProductDialogComponent,
     BillComponent,
+    StateDialogComponent,
   ],
   providers: [
     VehicleService,
