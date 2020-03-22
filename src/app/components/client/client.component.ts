@@ -13,7 +13,15 @@ import { ClientDialogComponent } from '../client-dialog/client-dialog.component'
   styleUrls: ['./client.component.scss']
 })
 export class ClientComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'nit', 'email', 'phone', 'subscription', 'options'];
+  displayedColumns: string[] = [
+    'position',
+    'name',
+    'nit',
+    'email',
+    'phone',
+    'subscription',
+    'options'
+  ];
   clients: ClientInterface[] = [];
   dataSource: MatTableDataSource<ClientInterface>;
 
@@ -111,11 +119,7 @@ export class ClientComponent implements OnInit {
           }
         });
     } catch (error) {
-      this.errorMessage(
-        error,
-        'Error',
-        'Error al actualizar un cliente.'
-      );
+      this.errorMessage(error, 'Error', 'Error al actualizar un cliente.');
     }
   }
 
@@ -128,11 +132,7 @@ export class ClientComponent implements OnInit {
         }
       });
     } catch (error) {
-      this.errorMessage(
-        error,
-        'Error',
-        'Error al actualizar un cliente.'
-      );
+      this.errorMessage(error, 'Error', 'Error al actualizar un cliente.');
     }
   }
 
@@ -152,11 +152,7 @@ export class ClientComponent implements OnInit {
           }
         });
     } catch (error) {
-      this.errorMessage(
-        error,
-        'Error',
-        'Error al eliminar un cliente.'
-      );
+      this.errorMessage(error, 'Error', 'Error al eliminar un cliente.');
     }
   }
 
@@ -169,11 +165,7 @@ export class ClientComponent implements OnInit {
         }
       });
     } catch (error) {
-      this.errorMessage(
-        error,
-        'Error',
-        'Error al eliminar un cliente.'
-      );
+      this.errorMessage(error, 'Error', 'Error al eliminar un cliente.');
     }
   }
 }

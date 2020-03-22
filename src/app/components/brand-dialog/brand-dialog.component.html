@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Opciones de Marca Vehiculo</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroupBrand">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Id" type="text" required [(ngModel)]="brandUpdate.id"
+            formControlName="id"/>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Marca" type="text" required [(ngModel)]="brandUpdate.name"
+            formControlName="name" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancelar</button>
+  <button mat-button [mat-dialog-close]="brandUpdate" *ngIf="formGroupBrand.valid">
+    Ok.
+  </button>
+</mat-dialog-actions>
