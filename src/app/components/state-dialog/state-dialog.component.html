@@ -1,1 +1,25 @@
-<p>state-dialog works!</p>
+<h2 mat-dialog-title>Opciones de Estado</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroupState">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Id" type="text" required [(ngModel)]="stateUpdate.id"
+            formControlName="id"/>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Tipo" type="text" required [(ngModel)]="stateUpdate.name"
+            formControlName="name" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancelar</button>
+  <button mat-button [mat-dialog-close]="stateUpdate" *ngIf="formGroupState.valid">
+    Ok.
+  </button>
+</mat-dialog-actions>
