@@ -41,6 +41,14 @@ import { BillService } from '../../services/bill/bill.service';
 import { StateOrderComponent } from '../../components/state-order/state-order.component';
 import { StateRequestComponent } from '../../components/state-request/state-request.component';
 import { StateDialogComponent } from '../../components/state-dialog/state-dialog.component';
+import { BrandComponent } from '../../components/brand/brand.component';
+import { BrandService } from '../../services/brand/brand.service';
+import { LineService } from '../../services/line/line.service';
+import { StateOrderService } from '../../services/state/state-order.service';
+import { StateRequestService } from '../../services/state/state-request.service';
+import { LineComponent } from '../../components/line/line.component';
+import { BrandDialogComponent } from '../../components/brand-dialog/brand-dialog.component';
+import { LineDialogComponent } from '../../components/line-dialog/line-dialog.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +78,10 @@ import { StateDialogComponent } from '../../components/state-dialog/state-dialog
     StateOrderComponent,
     StateRequestComponent,
     StateDialogComponent,
+    BrandComponent,
+    LineComponent,
+    BrandDialogComponent,
+    LineDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -95,6 +107,9 @@ import { StateDialogComponent } from '../../components/state-dialog/state-dialog
     SalesProductDialogComponent,
     BillComponent,
     StateDialogComponent,
+    BrandComponent,
+    BrandDialogComponent,
+    LineDialogComponent,
   ],
   providers: [
     VehicleService,
@@ -105,7 +120,11 @@ import { StateDialogComponent } from '../../components/state-dialog/state-dialog
     SalesService,
     { provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false } },
     { provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true } },
-    BillService
+    BillService,
+    BrandService,
+    LineService,
+    StateOrderService,
+    StateRequestService
   ],
   bootstrap: [HomeComponent]
 })

@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Opciones de Linea Vehiculo</h2>
+<mat-dialog-content>
+  <form [formGroup]="formGroupLine">
+    <div class="row">
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Id" type="text" required [(ngModel)]="lineUpdate.id"
+            formControlName="id"/>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Linea" type="text" required [(ngModel)]="lineUpdate.name"
+            formControlName="name" />
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancelar</button>
+  <button mat-button [mat-dialog-close]="lineUpdate" *ngIf="formGroupLine.valid">
+    Ok.
+  </button>
+</mat-dialog-actions>
