@@ -55,12 +55,11 @@ export class ProductVehicleDialogComponent implements OnInit {
 
   private getVehicles() {
     try {
-      /* Descomenta esta parte para que cargue los vehiculos */
-      /* this._VEHICLE_SERVICE.readVehicle().subscribe( (value: VehicleInterface[]) => {
+      this._VEHICLE_SERVICE.readVehicle().subscribe( (value: VehicleInterface[]) => {
         if (value) {
           this.vehicles = value;
         }
-      }); */
+      });
     } catch (error) {
       console.log(error);
     }
