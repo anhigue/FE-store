@@ -41,14 +41,13 @@ export class ProductComponent implements OnInit {
 
   private getProduct(): void {
     try {
-      /* descomenta estas lineas cuando termines de agregar las rutas */
-      /* this._PRODUCT_SERVICE.readProduct().subscribe( (value: ProductInterface[]) => {
+      this._PRODUCT_SERVICE.readProduct().subscribe( (value: ProductInterface[]) => {
         if (value) {
           this.products = value;
           this.dataSource = new MatTableDataSource<ProductInterface>(this.products);
           this.dataSource.paginator = this.paginator;
         }
-      }); */
+      });
       this.products.push({
         id: 1,
         name: 'Anibal Higueros',
@@ -128,6 +127,7 @@ export class ProductComponent implements OnInit {
 
   private updateProduct(product: ProductInterface) {
     try {
+      product.vehicles = null;
       this._PRODUCT_SERVICE.updateProduct(product).subscribe((value: any) => {
         if (value) {
           /* message update here */
@@ -194,6 +194,7 @@ export class ProductComponent implements OnInit {
 
   private updateStockProduct(product: ProductInterface) {
     try {
+      product.vehicles = null;
       this._PRODUCT_SERVICE
         .updateStockProduct(product)
         .subscribe((value: any) => {
@@ -217,13 +218,13 @@ export class ProductComponent implements OnInit {
           if (value.type === 'delete') {
             const deleteVehicle = {
               id: product.id,
-              vehicleId: value.data.universalCode
+              universalCode: value.data.universalCode
             };
             this.UnAssignVehicle(deleteVehicle);
           } else if (value.type === 'assign') {
             const assignVehicle = {
               id: product.id,
-              vehicleId: value.data.universalCode
+              universalCode: value.data.universalCode
             };
             this.assignVehicle(assignVehicle);
           }

@@ -19,30 +19,30 @@ export class ProductService {
   }
 
   newProduct(product: ProductInterface): Observable<any> {
-    return this.http.post(environment.API_BASE + '', product, {headers: this.headers});
+    return this.http.post(environment.API_BASE + '/product', product, {headers: this.headers});
   }
 
   readProduct(): Observable<ProductInterface[]> {
-    return this.http.get<ProductInterface[]>(environment.API_BASE + '', { headers: this.headers});
+    return this.http.get<ProductInterface[]>(environment.API_BASE + '/product', { headers: this.headers});
   }
 
   updateProduct(product: ProductInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', product, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/product', product, {headers: this.headers});
   }
 
   deleteProduct(product: ProductInterface): Observable<any> {
-    return this.http.delete(environment.API_BASE + '' + product.id, {headers: this.headers});
+    return this.http.delete(environment.API_BASE + '/product/' + product.id, {headers: this.headers});
   }
 
   assignVehicleProduct(product: ProductInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', product, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/product/vehicle/add', product, {headers: this.headers});
   }
 
   unAssignVehicleProduct(product: ProductInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', product, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/product/vehicle/remove', product, {headers: this.headers});
   }
 
   updateStockProduct(product: ProductInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', product, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/product/stock', product, {headers: this.headers});
   }
 }
