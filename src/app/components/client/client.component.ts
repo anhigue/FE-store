@@ -107,7 +107,7 @@ export class ClientComponent implements OnInit {
 
   wantUpdate(sub: ClientInterface) {
     try {
-      sub.subscriptionId = sub.subscription.id + "";
+      sub.subscriptionId = sub.subscription.id;
       this._DIALOG_SERVICE.shareData = sub;
       this._DIALOG_SERVICE
         .openDialog(ClientDialogComponent)

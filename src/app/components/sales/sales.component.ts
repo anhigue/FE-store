@@ -51,9 +51,6 @@ export class SaleComponent implements OnInit {
           email: 'Higueros71@gmail.com'
         },
         total: 200,
-        products: [
-          { id: 1, name: 'Bujia', price: 200, stock: 100 }
-        ]
       });
       this.dataSource = new MatTableDataSource<SaleInterface>(this.sales);
       this.dataSource.paginator = this.paginator;
@@ -142,4 +139,5 @@ export class SaleComponent implements OnInit {
       );
     }
   }
+
 }

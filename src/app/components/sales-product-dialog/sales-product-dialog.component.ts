@@ -4,6 +4,7 @@ import { ProductInterface } from '../../../interfaces/ProductInterface';
 import { MatTableDataSource } from '@angular/material/table';
 import { ProductService } from '../../services/product/product.service';
 import { DialogService } from '../../services/dialog/dialog.service';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-sales-product-dialog',
@@ -26,6 +27,7 @@ export class SalesProductDialogComponent implements OnInit {
   dataSourceFabric: MatTableDataSource<ProductInterface>;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private _DIALOG_SERVICE: DialogService,
@@ -45,12 +47,14 @@ export class SalesProductDialogComponent implements OnInit {
           this.products = value;
           this.dataSource = new MatTableDataSource<ProductInterface>(this.products);
           this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
         }
       }); */
       this.products.push({
         id: 1,
-        name: 'Anibal Higueros',
+        name: 'Bujia',
         price: 200,
+        stock: 40,
         vehicles: [
           {
             universalCode: 'AADDSSkS',
@@ -60,8 +64,23 @@ export class SalesProductDialogComponent implements OnInit {
           }
         ]
       });
+      this.products.push({
+        id: 2,
+        name: 'Punta de flecha',
+        price: 2000,
+        vehicles: [
+          {
+            universalCode: 'AADDSSkS',
+            brand: 'Ford',
+            line: 'Escape',
+            year: 2002
+          }
+        ],
+        stock: 4
+      });
       this.dataSource = new MatTableDataSource<ProductInterface>(this.products);
       this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     } catch (error) {
       this._DIALOG_SERVICE.errorMessage(
         error,
