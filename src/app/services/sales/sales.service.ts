@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SaleInterface } from '../../../interfaces/SaleInterface';
+import {
+  SaleInterface,
+  SaleProductInterface
+} from '../../../interfaces/SaleInterface';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ProductInterface } from '../../../interfaces/ProductInterface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -42,14 +45,9 @@ export class SalesService {
     });
   }
 
-  assignProductSale(
-    sale: SaleInterface,
-    product: ProductInterface
-  ): Observable<any> {
-    return this.http.post<any>(
-      environment.API_BASE + '',
-      { saleId: sale.id, product: product.id },
-      { headers: this.headers }
-    );
+  public assignProductSale(product: SaleProductInterface): Observable<any> {
+    return this.http.post<any>(environment.API_BASE + '', product, {
+      headers: this.headers
+    });
   }
 }

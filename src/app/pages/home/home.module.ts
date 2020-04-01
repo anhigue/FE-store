@@ -52,6 +52,8 @@ import { LineDialogComponent } from '../../components/line-dialog/line-dialog.co
 import { FactoryService } from '../../services/factory/factory.service';
 import { FactoryComponent } from '../../components/factory/factory.component';
 import { FactoryDialogComponent } from '../../components/factory-dialog/factory-dialog.component';
+import { ClientSelectOrderComponent } from '../../components/client-select/client-select.component';
+import { ClientService } from '../../services/client/client.service';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { FactoryDialogComponent } from '../../components/factory-dialog/factory-
     LineDialogComponent,
     FactoryComponent,
     FactoryDialogComponent,
+    ClientSelectOrderComponent,
   ],
   imports: [
     CommonModule,
@@ -117,6 +120,7 @@ import { FactoryDialogComponent } from '../../components/factory-dialog/factory-
     LineDialogComponent,
     FactoryComponent,
     FactoryDialogComponent,
+    ClientSelectOrderComponent,
   ],
   providers: [
     VehicleService,
@@ -132,7 +136,8 @@ import { FactoryDialogComponent } from '../../components/factory-dialog/factory-
     LineService,
     StateOrderService,
     StateRequestService,
-    FactoryService
+    FactoryService,
+    ClientService
   ],
   bootstrap: [HomeComponent]
 })
