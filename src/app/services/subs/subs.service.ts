@@ -19,19 +19,19 @@ export class SubsService {
   }
 
   newSub(sub: SubInterface): Observable<any> {
-    return this.http.post(environment.API_BASE + '', sub, {headers: this.headers});
+    return this.http.post(environment.API_BASE + '/subscription', sub, {headers: this.headers});
   }
 
   readSub(): Observable<SubInterface[]> {
-    return this.http.get<SubInterface[]>(environment.API_BASE + '', { headers: this.headers});
+    return this.http.get<SubInterface[]>(environment.API_BASE + '/subscription', { headers: this.headers});
   }
 
   updateSub(sub: SubInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', sub, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/subscription', sub, {headers: this.headers});
   }
 
   deleteSub(sub: SubInterface): Observable<any> {
-    return this.http.delete(environment.API_BASE + '' + sub.id, {headers: this.headers});
+    return this.http.delete(environment.API_BASE + '/subscription/' + sub.id, {headers: this.headers});
   }
 
 }

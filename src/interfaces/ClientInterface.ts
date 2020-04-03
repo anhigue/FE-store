@@ -6,5 +6,6 @@ export interface ClientInterface {
   email?: string;
   phone?: string;
   image?: string;
+  subscriptionId?: number;
   subscription?: SubInterface;
 }

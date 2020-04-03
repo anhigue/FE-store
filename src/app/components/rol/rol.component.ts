@@ -30,14 +30,13 @@ export class RolComponent implements OnInit {
 
   private getRol(): void {
     try {
-      /* descomenta estas lineas cuando termines de agregar las rutas */
-      /* this._ROL_SERVICE.readRol().subscribe( (value: RolInterface[]) => {
+      this._ROL_SERVICE.readRol().subscribe( (value: RolInterface[]) => {
         if (value) {
           this.rol = value;
           this.dataSource = new MatTableDataSource<RolInterface>(this.rol);
           this.dataSource.paginator = this.paginator;
         }
-      }); */
+      });
       this.rol.push({
         id: 1,
         name: 'Cliente mayorista'

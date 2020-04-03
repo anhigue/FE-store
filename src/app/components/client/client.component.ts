@@ -13,7 +13,15 @@ import { ClientDialogComponent } from '../client-dialog/client-dialog.component'
   styleUrls: ['./client.component.scss']
 })
 export class ClientComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'nit', 'email', 'phone', 'subscription', 'options'];
+  displayedColumns: string[] = [
+    'position',
+    'name',
+    'nit',
+    'email',
+    'phone',
+    'subscription',
+    'options'
+  ];
   clients: ClientInterface[] = [];
   dataSource: MatTableDataSource<ClientInterface>;
 
@@ -30,24 +38,11 @@ export class ClientComponent implements OnInit {
 
   private getClient(): void {
     try {
-      /* descomenta estas lineas cuando termines de agregar las rutas */
-      /* this._CLIENT_SERVICE.readClient().subscribe( (value: ClientInterface[]) => {
+      this._CLIENT_SERVICE.readClient().subscribe( (value: ClientInterface[]) => {
         if (value) {
           this.clients = value;
           this.dataSource = new MatTableDataSource<ClientInterface>(this.clients);
           this.dataSource.paginator = this.paginator;
-        }
-      }); */
-      this.clients.push({
-        id: 1,
-        name: 'Anibal Higueros',
-        email: '',
-        image: '',
-        nit: '',
-        phone: '',
-        subscription: {
-          id: 1,
-          name: 'Cliente Mayorista'
         }
       });
       this.dataSource = new MatTableDataSource<ClientInterface>(this.clients);
@@ -72,12 +67,23 @@ export class ClientComponent implements OnInit {
 
   public wantCreate() {
     try {
-      this._DIALOG_SERVICE.shareData = {};
+      this._DIALOG_SERVICE.shareData = {
+        name: '',
+        nit: '',
+        email: '',
+        phone: '',
+        image: '',
+        subscription: {
+          id: 0,
+          name: ''
+        }
+      };
       this._DIALOG_SERVICE
         .openDialog(ClientDialogComponent)
         .beforeClosed()
         .subscribe((value: ClientInterface) => {
           if (value) {
+            value.subscription = null;
             this.createClient(value);
           }
         });
@@ -101,21 +107,19 @@ export class ClientComponent implements OnInit {
 
   wantUpdate(sub: ClientInterface) {
     try {
+      sub.subscriptionId = sub.subscription.id;
       this._DIALOG_SERVICE.shareData = sub;
       this._DIALOG_SERVICE
         .openDialog(ClientDialogComponent)
         .beforeClosed()
         .subscribe((value: ClientInterface) => {
           if (value) {
+            value.subscription = null;
             this.updateClient(value);
           }
         });
     } catch (error) {
-      this.errorMessage(
-        error,
-        'Error',
-        'Error al actualizar un cliente.'
-      );
+      this.errorMessage(error, 'Error', 'Error al actualizar un cliente.');
     }
   }
 
@@ -128,11 +132,7 @@ export class ClientComponent implements OnInit {
         }
       });
     } catch (error) {
-      this.errorMessage(
-        error,
-        'Error',
-        'Error al actualizar un cliente.'
-      );
+      this.errorMessage(error, 'Error', 'Error al actualizar un cliente.');
     }
   }
 
@@ -152,11 +152,7 @@ export class ClientComponent implements OnInit {
           }
         });
     } catch (error) {
-      this.errorMessage(
-        error,
-        'Error',
-        'Error al eliminar un cliente.'
-      );
+      this.errorMessage(error, 'Error', 'Error al eliminar un cliente.');
     }
   }
 
@@ -169,11 +165,7 @@ export class ClientComponent implements OnInit {
         }
       });
     } catch (error) {
-      this.errorMessage(
-        error,
-        'Error',
-        'Error al eliminar un cliente.'
-      );
+      this.errorMessage(error, 'Error', 'Error al eliminar un cliente.');
     }
   }
 }

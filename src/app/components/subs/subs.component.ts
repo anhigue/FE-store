@@ -30,14 +30,13 @@ export class SubsComponent implements OnInit {
 
   private getSubs(): void {
     try {
-      /* descomenta estas lineas cuando termines de agregar las rutas */
-      /* this._SUB_SERVICE.readSub().subscribe( (value: SubInterface[]) => {
+      this._SUB_SERVICE.readSub().subscribe( (value: SubInterface[]) => {
         if (value) {
           this.subs = value;
           this.dataSource = new MatTableDataSource<SubInterface>(this.subs);
           this.dataSource.paginator = this.paginator;
         }
-      }); */
+      });
       this.subs.push({
         id: 1,
         name: 'Taller de reparacion'

@@ -13,6 +13,7 @@ import { CataloguePartsComponent } from './pages/home/catalogue-parts/catalogue-
 import { SalesComponent } from './pages/home/sales/sales.component';
 import { CreateComponent } from './pages/home/catalogue-user/create/create.component';
 import { UpdateUserComponent } from './pages/home/catalogue-user/update-user/update-user.component';
+import { AdminBillComponent } from './pages/home/admin-bill/admin-bill.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,11 @@ const routes: Routes = [
       {
         path: 'sales',
         component: SalesComponent,
+        /* canActivate: [UserOutGuard] */
+      },
+      {
+        path: 'bill',
+        component: AdminBillComponent,
         /* canActivate: [UserOutGuard] */
       },
       {

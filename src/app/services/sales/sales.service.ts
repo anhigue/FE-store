@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { SaleInterface } from '../../../interfaces/SaleInterface';
+import {
+  SaleInterface,
+  SaleProductInterface
+} from '../../../interfaces/SaleInterface';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { ProductInterface } from '../../../interfaces/ProductInterface';
+import { OrderInterface, OrderProductInterface } from '../../../interfaces/SaleInterface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +24,12 @@ export class SalesService {
 
   newSale(sale: SaleInterface): Observable<any> {
     return this.http.post<any>(environment.API_BASE + '', sale, {
+      headers: this.headers
+    });
+  }
+
+  newOrder(order: OrderInterface): Observable<any> {
+    return this.http.post<any>(environment.API_BASE + '', order, {
       headers: this.headers
     });
   }
@@ -42,14 +52,15 @@ export class SalesService {
     });
   }
 
-  assignProductSale(
-    sale: SaleInterface,
-    product: ProductInterface
-  ): Observable<any> {
-    return this.http.post<any>(
-      environment.API_BASE + '',
-      { saleId: sale.id, product: product.id },
-      { headers: this.headers }
-    );
+  public assignProductSale(product: SaleProductInterface): Observable<any> {
+    return this.http.post<any>(environment.API_BASE + '', product, {
+      headers: this.headers
+    });
+  }
+
+  public assignProductOrder(productOrder: SaleProductInterface): Observable<any> {
+    return this.http.post<any>(environment.API_BASE + '', productOrder, {
+      headers: this.headers
+    });
   }
 }

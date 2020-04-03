@@ -1,0 +1,42 @@
+<h2 mat-dialog-title>Agregar una fabrica al pedido</h2>
+<mat-dialog-content>
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombre Fabrica</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ip">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> IP Conexion</th>
+      <td mat-cell *matCellDef="let element"> {{element.ip}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="lastDateConsult">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ultimo dia de consulta</th>
+      <td mat-cell *matCellDef="let element"> {{element.lastDateHistoryConsult | date: 'dd/MM/yyy'}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef> Opciones </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-menu #appMenuCoin="matMenu">
+          <ng-template matMenuContent>
+            <button mat-menu-item [mat-dialog-close]="element">Agregar</button>
+          </ng-template>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="appMenuCoin">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</mat-dialog-content>

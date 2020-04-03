@@ -22,7 +22,6 @@ export class SubsDialogComponent implements OnInit {
   ngOnInit() {
     this.subUpdate = this.data;
     this.formGroupSub = this._FORM_BUILDER.group({
-      id: ['', Validators.required],
       name: ['', Validators.required],
     });
   }

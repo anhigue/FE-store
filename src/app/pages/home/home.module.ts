@@ -35,6 +35,26 @@ import { SalesService } from '../../services/sales/sales.service';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { FilterPipeModule } from 'ngx-filter-pipe';
 import { SalesProductDialogComponent } from '../../components/sales-product-dialog/sales-product-dialog.component';
+import { AdminBillComponent } from './admin-bill/admin-bill.component';
+import { BillComponent } from '../../components/bill/bill.component';
+import { BillService } from '../../services/bill/bill.service';
+import { StateOrderComponent } from '../../components/state-order/state-order.component';
+import { StateRequestComponent } from '../../components/state-request/state-request.component';
+import { StateDialogComponent } from '../../components/state-dialog/state-dialog.component';
+import { BrandComponent } from '../../components/brand/brand.component';
+import { BrandService } from '../../services/brand/brand.service';
+import { LineService } from '../../services/line/line.service';
+import { StateOrderService } from '../../services/state/state-order.service';
+import { StateRequestService } from '../../services/state/state-request.service';
+import { LineComponent } from '../../components/line/line.component';
+import { BrandDialogComponent } from '../../components/brand-dialog/brand-dialog.component';
+import { LineDialogComponent } from '../../components/line-dialog/line-dialog.component';
+import { FactoryService } from '../../services/factory/factory.service';
+import { FactoryComponent } from '../../components/factory/factory.component';
+import { FactoryDialogComponent } from '../../components/factory-dialog/factory-dialog.component';
+import { ClientSelectOrderComponent } from '../../components/client-select/client-select.component';
+import { ClientService } from '../../services/client/client.service';
+import { FactorySelectComponent } from '../../components/factory-select/factory-select.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +79,19 @@ import { SalesProductDialogComponent } from '../../components/sales-product-dial
     SaleComponent,
     SalesDialogComponent,
     SalesProductDialogComponent,
+    AdminBillComponent,
+    BillComponent,
+    StateOrderComponent,
+    StateRequestComponent,
+    StateDialogComponent,
+    BrandComponent,
+    LineComponent,
+    BrandDialogComponent,
+    LineDialogComponent,
+    FactoryComponent,
+    FactoryDialogComponent,
+    ClientSelectOrderComponent,
+    FactorySelectComponent,
   ],
   imports: [
     CommonModule,
@@ -82,6 +115,15 @@ import { SalesProductDialogComponent } from '../../components/sales-product-dial
     ProductStockDialogComponent,
     SalesDialogComponent,
     SalesProductDialogComponent,
+    BillComponent,
+    StateDialogComponent,
+    BrandComponent,
+    BrandDialogComponent,
+    LineDialogComponent,
+    FactoryComponent,
+    FactoryDialogComponent,
+    ClientSelectOrderComponent,
+    FactorySelectComponent,
   ],
   providers: [
     VehicleService,
@@ -91,7 +133,14 @@ import { SalesProductDialogComponent } from '../../components/sales-product-dial
     ProductService,
     SalesService,
     { provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false } },
-    { provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true } }
+    { provide: STEPPER_GLOBAL_OPTIONS, useValue: { showError: true } },
+    BillService,
+    BrandService,
+    LineService,
+    StateOrderService,
+    StateRequestService,
+    FactoryService,
+    ClientService
   ],
   bootstrap: [HomeComponent]
 })

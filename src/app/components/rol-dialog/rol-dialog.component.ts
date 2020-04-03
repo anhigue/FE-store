@@ -22,7 +22,6 @@ export class RolDialogComponent implements OnInit {
   ngOnInit() {
     this.rolUpdate = this.data;
     this.formGroupRol = this._FORM_BUILDER.group({
-      id: ['', Validators.required],
       name: ['', Validators.required],
     });
   }
