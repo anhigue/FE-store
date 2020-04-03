@@ -1,4 +1,18 @@
 <h5>Modulo de Partes</h5>
 <small>Administra el catalogo de partes del sistema de ventas.</small>
 <hr>
-<app-product></app-product>
+<mat-tab-group>
+  <mat-tab label="Listado de productos">
+    <app-product></app-product>
+  </mat-tab>
+  <mat-tab label="Busqueda de productos">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <br>
+          <app-sales-product-dialog></app-sales-product-dialog>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

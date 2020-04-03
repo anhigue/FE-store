@@ -1,4 +1,24 @@
-<h2 mat-dialog-title>Agregar un producto a la lista</h2>
+<h4>
+  <p>Buscar partes</p>
+  <small>Busca el producto que sea de tu interes.</small>
+</h4>
+<div class="row">
+  <div class="col-md-6">
+    <mat-form-field>
+      <mat-label>Nombre, descripcion, precio, No. parte</mat-label>
+      <input matInput placeholder="No. Parte: NN0234" (keyup)="applyFilterNameValuePrice($event)" >
+    </mat-form-field>
+  </div>
+  <div class="col-md-6">
+    <mat-form-field>
+      <mat-select (change)="applyFilterVehicle($event)">
+        <mat-option *ngFor="let vehicle of cars" [value]="vehicle">
+          {{vehicle.universalCode}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
 <mat-dialog-content>
   <mat-tab-group>
     <mat-tab label="Repuestos de tienda">
@@ -52,7 +72,7 @@
       </table>
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </mat-tab>
-    <!-- <mat-tab label="Repuestos de fabricas">
+    <mat-tab label="Repuestos de fabricas">
       <table mat-table [dataSource]="dataSourceFabric">
 
         <ng-container matColumnDef="position">
@@ -102,9 +122,8 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
       <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </mat-tab> -->
+    </mat-tab>
   </mat-tab-group>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-button [mat-dialog-close]="false">Cancelar</button>
 </mat-dialog-actions>
