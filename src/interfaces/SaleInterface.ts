@@ -8,6 +8,8 @@ export interface OrderProductInterface {
   id?: number;
   stockOrder?: number;
   productId?: number;
+  priceSale?: number;
+  stockSale?: number;
   product?: ProductInterface;
 }
 
