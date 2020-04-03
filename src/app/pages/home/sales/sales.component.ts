@@ -307,7 +307,12 @@ export class SalesComponent implements OnInit {
     try {
       this._SALE_SERVICE.newSale(sale).subscribe((value: any) => {
         if (value) {
-          this.assignProductSale(value);
+          this._DIALOG_SERVICE.shareData = {
+            title: 'Nueva venta',
+            message:
+              'Se a realizado la orden de venta de repuestos con exito, actualiza el listado de ordenes para poder visualizar la orden.'
+          };
+          this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
         }
       });
     } catch (error) {
@@ -324,7 +329,12 @@ export class SalesComponent implements OnInit {
     try {
       this._SALE_SERVICE.newOrder(order).subscribe((value: any) => {
         if (value) {
-          this.assignProductOrder(value);
+          this._DIALOG_SERVICE.shareData = {
+            title: 'Nuevo Pedido',
+            message:
+              'Se a realizado la orden de venta de repuestos con exito, actualiza el listado de pedidos para poder visualizar el pedido.'
+          };
+          this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
         }
       });
     } catch (error) {
