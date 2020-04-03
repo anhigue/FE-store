@@ -6,6 +6,7 @@ import {
 } from '../../../interfaces/SaleInterface';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { OrderInterface, OrderProductInterface } from '../../../interfaces/SaleInterface';
 
 
 @Injectable({
@@ -23,6 +24,12 @@ export class SalesService {
 
   newSale(sale: SaleInterface): Observable<any> {
     return this.http.post<any>(environment.API_BASE + '', sale, {
+      headers: this.headers
+    });
+  }
+
+  newOrder(order: OrderInterface): Observable<any> {
+    return this.http.post<any>(environment.API_BASE + '', order, {
       headers: this.headers
     });
   }
@@ -47,6 +54,12 @@ export class SalesService {
 
   public assignProductSale(product: SaleProductInterface): Observable<any> {
     return this.http.post<any>(environment.API_BASE + '', product, {
+      headers: this.headers
+    });
+  }
+
+  public assignProductOrder(productOrder: SaleProductInterface): Observable<any> {
+    return this.http.post<any>(environment.API_BASE + '', productOrder, {
       headers: this.headers
     });
   }
