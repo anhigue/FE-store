@@ -13,7 +13,7 @@ import { SubsDialogComponent } from '../subs-dialog/subs-dialog.component';
   styleUrls: ['./subs.component.scss']
 })
 export class SubsComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'options'];
+  displayedColumns: string[] = ['position', 'name', 'discount', 'options'];
   subs: SubInterface[] = [];
   dataSource: MatTableDataSource<SubInterface>;
 

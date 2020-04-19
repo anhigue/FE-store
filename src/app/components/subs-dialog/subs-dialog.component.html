@@ -2,10 +2,16 @@
 <mat-dialog-content>
   <form [formGroup]="formGroupSub">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-6">
         <mat-form-field>
-          <input matInput placeholder="ISO" type="text" required [(ngModel)]="subUpdate.name"
+          <input matInput placeholder="Nombre" type="text" required [(ngModel)]="subUpdate.name"
             formControlName="name" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field>
+          <input matInput placeholder="Descuento" type="number" required [(ngModel)]="subUpdate.discount"
+            formControlName="discount" />
         </mat-form-field>
       </div>
     </div>

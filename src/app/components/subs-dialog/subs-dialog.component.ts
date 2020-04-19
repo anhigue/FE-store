@@ -23,6 +23,7 @@ export class SubsDialogComponent implements OnInit {
     this.subUpdate = this.data;
     this.formGroupSub = this._FORM_BUILDER.group({
       name: ['', Validators.required],
+      discount: ['', Validators.required]
     });
   }
 
