@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ProductService } from '../../services/product/product.service';
 import { DialogService } from '../../services/dialog/dialog.service';
 import { MatSort } from '@angular/material/sort';
+import { VehicleService } from '../../services/vehicle/vehicle.service';
 
 @Component({
   selector: 'app-sales-product-dialog',
@@ -26,7 +27,7 @@ export class SalesProductDialogComponent implements OnInit {
   productsFabric: ProductInterface[] = [];
   dataSource: MatTableDataSource<ProductInterface>;
   dataSourceFabric: MatTableDataSource<ProductInterface>;
-  cars = ELEMENT_DATA_VEHICLES;
+  cars: VehicleInterface[];
 
   vehicleSelected: VehicleInterface;
   partsFound: ProductInterface[] = [];
@@ -36,12 +37,30 @@ export class SalesProductDialogComponent implements OnInit {
 
   constructor(
     private _DIALOG_SERVICE: DialogService,
-    private _PRODUCT_SERVICE: ProductService
+    private _PRODUCT_SERVICE: ProductService,
+    private _VEHICLE_SERVICE: VehicleService
   ) {}
 
   ngOnInit() {
     this.getProduct();
     this.getProductFabric();
+    this.getVehicles();
+  }
+
+  getVehicles(): void {
+    try {
+      this._VEHICLE_SERVICE.readVehicle().subscribe( (value: VehicleInterface[]) => {
+        if (value) {
+          this.cars = value;
+        }
+      });
+    } catch (error) {
+      this._DIALOG_SERVICE.errorMessage(
+        error,
+        'Error',
+        'Error al traer los vehiculos'
+      );
+    }
   }
 
   private getProduct(): void {
@@ -59,53 +78,6 @@ export class SalesProductDialogComponent implements OnInit {
             this.dataSource.sort = this.sort;
           }
         });
-      this.products.push({
-        id: 1,
-        name: 'Bujia',
-        price: 200,
-        stock: 40,
-        vehicles: [
-          {
-            universalCode: 'AADDS',
-            brand: {
-              id: 1,
-              name: 'Hyundai',
-            },
-            line: {
-              id: 1,
-              name: 'Assent',
-            },
-            year: 2020,
-            brandId: 1,
-            lineId: 1,
-          },
-        ],
-      });
-      this.products.push({
-        id: 2,
-        name: 'Punta de flecha',
-        price: 2000,
-        vehicles: [
-          {
-            universalCode: 'AADDSSkS',
-            brand: {
-              id: 1,
-              name: 'Ford',
-            },
-            line: {
-              id: 1,
-              name: 'Escape',
-            },
-            year: 2002,
-            brandId: 1,
-            lineId: 1,
-          },
-        ],
-        stock: 4,
-      });
-      this.dataSource = new MatTableDataSource<ProductInterface>(this.products);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
       console.log(this.products);
     } catch (error) {
       this._DIALOG_SERVICE.errorMessage(
@@ -118,10 +90,9 @@ export class SalesProductDialogComponent implements OnInit {
 
   private getProductFabric(): void {
     try {
-      this.dataSourceFabric = new MatTableDataSource<ProductInterface>(
-        this.productsFabric
-      );
+      this.dataSourceFabric = new MatTableDataSource<ProductInterface>(this.productsFabric);
       this.dataSourceFabric.paginator = this.paginator;
+      this.dataSourceFabric.sort = this.sort;
     } catch (error) {
       this._DIALOG_SERVICE.errorMessage(
         error,
@@ -210,34 +181,3 @@ export class SalesProductDialogComponent implements OnInit {
     }
   }
 }
-
-const ELEMENT_DATA_VEHICLES = [
-  {
-    universalCode: 'AADDSSkS',
-    brand: {
-      id: 1,
-      name: 'Ford',
-    },
-    line: {
-      id: 1,
-      name: 'Escape',
-    },
-    year: 2002,
-    brandId: 1,
-    lineId: 1,
-  },
-  {
-    universalCode: 'AADDS',
-    brand: {
-      id: 1,
-      name: 'Hyundai',
-    },
-    line: {
-      id: 1,
-      name: 'Assent',
-    },
-    year: 2020,
-    brandId: 1,
-    lineId: 1,
-  },
-];
