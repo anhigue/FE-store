@@ -56,6 +56,7 @@ import { ClientSelectOrderComponent } from '../../components/client-select/clien
 import { ClientService } from '../../services/client/client.service';
 import { FactorySelectComponent } from '../../components/factory-select/factory-select.component';
 import { CreditSaleComponent } from '../../components/credit-sale/credit-sale.component';
+import { OrderComponent } from '../../components/order/order.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { CreditSaleComponent } from '../../components/credit-sale/credit-sale.co
     ClientSelectOrderComponent,
     FactorySelectComponent,
     CreditSaleComponent,
+    OrderComponent,
   ],
   imports: [
     CommonModule,
