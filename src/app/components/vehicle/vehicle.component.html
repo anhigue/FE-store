@@ -10,8 +10,12 @@
       </div>
       <div class="col-md-6">
         <mat-form-field>
-          <input matInput placeholder="Marca" type="text" required [(ngModel)]="vehicleUpdate.brand"
-            formControlName="brand" />
+          <mat-label>Marca</mat-label>
+          <mat-select formControlName="brand" required [(ngModel)]="vehicleUpdate.brand">
+            <mat-option *ngFor="let item of brand" [value]="item.id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>
@@ -19,8 +23,12 @@
     <div class="row">
       <div class="col-md-6">
         <mat-form-field>
-          <input matInput placeholder="Linea" type="text" required [(ngModel)]="vehicleUpdate.line"
-            formControlName="line" />
+          <mat-label>Linea</mat-label>
+          <mat-select formControlName="line" required [(ngModel)]="vehicleUpdate.line">
+            <mat-option *ngFor="let item of line" [value]="item.id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="col-md-6">

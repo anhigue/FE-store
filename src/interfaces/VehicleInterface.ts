@@ -10,7 +10,9 @@ export interface LineInterface {
 
 export interface VehicleInterface {
   universalCode?: string;
-  brand?: string;
-  line?: string;
+  brandId?: number;
+  lineId?: number;
   year?: number;
+  brand?: BrandInterface;
+  line?: LineInterface;
 }

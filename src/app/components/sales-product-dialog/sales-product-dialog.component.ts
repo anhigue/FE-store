@@ -65,9 +65,11 @@ export class SalesProductDialogComponent implements OnInit {
         vehicles: [
           {
             universalCode: 'AADDSSkS',
-            brand: 'Ford',
-            line: 'Escape',
-            year: 2002
+            brand: {},
+            line: {},
+            year: 2002,
+            brandId: 1,
+            lineId: 1
           }
         ],
         stock: 4
