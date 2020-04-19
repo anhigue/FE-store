@@ -44,7 +44,7 @@ export interface SaleInterface {
   orderId?: number;
   status?: StateInterface;
   client?: ClientInterface;
-  productOrder?: SaleProductInterface[];
+  productSale?: SaleProductInterface[];
   order?: OrderInterface;
 }
 
