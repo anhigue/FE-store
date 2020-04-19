@@ -55,6 +55,7 @@ import { FactoryDialogComponent } from '../../components/factory-dialog/factory-
 import { ClientSelectOrderComponent } from '../../components/client-select/client-select.component';
 import { ClientService } from '../../services/client/client.service';
 import { FactorySelectComponent } from '../../components/factory-select/factory-select.component';
+import { CreditSaleComponent } from '../../components/credit-sale/credit-sale.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { FactorySelectComponent } from '../../components/factory-select/factory-
     FactoryDialogComponent,
     ClientSelectOrderComponent,
     FactorySelectComponent,
+    CreditSaleComponent,
   ],
   imports: [
     CommonModule,

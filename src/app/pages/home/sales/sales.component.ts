@@ -15,7 +15,8 @@ import { ClientSelectOrderComponent } from '../../../components/client-select/cl
 import { DialogCustomComponent } from 'src/app/components/dialog-custom/dialog-custom.component';
 import { FactoryInterface } from '../../../../interfaces/FactoryInterface';
 import { FactorySelectComponent } from '../../../components/factory-select/factory-select.component';
-import { OrderProductInterface } from '../../../../interfaces/SaleInterface';
+import { OrderProductInterface, CreditSaleInterface } from '../../../../interfaces/SaleInterface';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-sales',
@@ -68,8 +69,6 @@ export class SalesComponent implements OnInit {
     'options'
   ];
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
   factoryValidate: FormGroup;
   factoryCreate: FactoryInterface = {
     ip: null,
@@ -78,6 +77,10 @@ export class SalesComponent implements OnInit {
     name: null,
     servicePassword: null
   };
+
+  /* table components */
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private _FORM_BUILDER: FormBuilder,

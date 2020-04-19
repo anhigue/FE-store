@@ -7,6 +7,7 @@ import {
 } from '../../../interfaces/SaleInterface';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { CreditSaleInterface } from '../../../interfaces/SaleInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -83,5 +84,13 @@ export class SalesService {
       { sale, state },
       { headers: this.headers }
     );
+  }
+
+  readCreditSales(): Observable<CreditSaleInterface[]> {
+    return this.http.get<any[]>(environment.API_BASE + '', { headers: this.headers });
+  }
+
+  payCreditSale(creditSale: CreditSaleInterface): Observable<any> {
+    return this.http.post<any>(environment.API_BASE + '', creditSale, { headers: this.headers });
   }
 }
