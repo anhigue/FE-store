@@ -54,9 +54,11 @@ export class ProductComponent implements OnInit {
         vehicles: [
           {
             universalCode: 'AADDSSkS',
-            brand: 'Ford',
-            line: 'Escape',
-            year: 2002
+            brand: {},
+            line: {},
+            year: 2002,
+            lineId: 1,
+            brandId: 1
           }
         ]
       });
