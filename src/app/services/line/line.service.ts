@@ -20,18 +20,18 @@ export class LineService {
   }
 
   newLine(line: LineInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', line, {headers: this.headers});
+    return this.http.post<any>(environment.API_BASE + '/line', line, {headers: this.headers});
   }
 
   readLine(): Observable<any> {
-    return this.http.get<any>(environment.API_BASE + '', {headers: this.headers});
+    return this.http.get<any>(environment.API_BASE + '/line', {headers: this.headers});
   }
 
   updateLine(line: LineInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', line, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/line', line, {headers: this.headers});
   }
 
   deleteLine(line: LineInterface): Observable<any> {
-    return this.http.delete<any>(environment.API_BASE + '' + line.id, {headers: this.headers});
+    return this.http.delete<any>(environment.API_BASE + '/line/' + line.id, {headers: this.headers});
   }
 }

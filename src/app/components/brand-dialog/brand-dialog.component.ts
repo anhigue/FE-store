@@ -22,7 +22,6 @@ export class BrandDialogComponent implements OnInit {
   ngOnInit() {
     this.brandUpdate = this.data;
     this.formGroupBrand = this._FORM_BUILDER.group({
-      id: ['', Validators.required],
       name: ['', Validators.required],
     });
   }

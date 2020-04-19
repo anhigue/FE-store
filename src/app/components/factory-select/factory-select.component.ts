@@ -39,13 +39,6 @@ export class FactorySelectComponent implements OnInit {
           this.dataSource.sort = this.sort;
         }
       });
-      this.factory.push({
-        id: 1,
-        name: 'BOSH',
-        ip: '190.113.91.36',
-        lastDateHistoryConsult: new Date(),
-        passwordService: ''
-      });
       this.dataSource = new MatTableDataSource<FactoryInterface>(this.factory);
       this.dataSource.paginator = this.paginator;
     } catch (error) {

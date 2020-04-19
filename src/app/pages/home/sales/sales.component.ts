@@ -73,10 +73,10 @@ export class SalesComponent implements OnInit {
   factoryValidate: FormGroup;
   factoryCreate: FactoryInterface = {
     ip: null,
-    lastDateHistoryConsult: null,
+    lastDateRequest: null,
     id: null,
     name: null,
-    passwordService: null
+    servicePassword: null
   };
 
   constructor(

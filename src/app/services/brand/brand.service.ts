@@ -20,18 +20,18 @@ export class BrandService {
   }
 
   newBrand(brand: BrandInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', brand, {headers: this.headers});
+    return this.http.post<any>(environment.API_BASE + '/brand', brand, {headers: this.headers});
   }
 
   readBrand(): Observable<any> {
-    return this.http.get<any>(environment.API_BASE + '', {headers: this.headers});
+    return this.http.get<any>(environment.API_BASE + '/brand', {headers: this.headers});
   }
 
   updateBrand(brand: BrandInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', brand, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/brand', brand, {headers: this.headers});
   }
 
   deleteBrand(brand: BrandInterface): Observable<any>{
-    return this.http.delete<any>(environment.API_BASE + '' + brand.id, {headers: this.headers});
+    return this.http.delete<any>(environment.API_BASE + '/brand/' + brand.id, {headers: this.headers});
   }
 }

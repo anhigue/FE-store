@@ -19,18 +19,18 @@ export class StateOrderService {
   }
 
   newStateOrder(state: StateInterface): Observable<any> {
-    return this.http.post(environment.API_BASE + '', state, {headers: this.headers});
+    return this.http.post(environment.API_BASE + '/order/state', state, {headers: this.headers});
   }
 
   readStateOrder(): Observable<StateInterface[]> {
-    return this.http.get<StateInterface[]>(environment.API_BASE + '', { headers: this.headers});
+    return this.http.get<StateInterface[]>(environment.API_BASE + '/order/state', { headers: this.headers});
   }
 
   updateStateOrder(state: StateInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', state, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/order/state', state, {headers: this.headers});
   }
 
   deleteStateOrder(state: StateInterface): Observable<any> {
-    return this.http.delete(environment.API_BASE + '' + state.id, {headers: this.headers});
+    return this.http.delete(environment.API_BASE + '/order/state/' + state.id, {headers: this.headers});
   }
 }

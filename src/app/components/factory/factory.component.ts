@@ -14,7 +14,7 @@ import { DialogCustomComponent } from '../dialog-custom/dialog-custom.component'
 })
 export class FactoryComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'ip', 'lastDateConsult', 'options'];
+  displayedColumns: string[] = ['position', 'name', 'ip', 'lastDateRequest', 'options'];
   factory: FactoryInterface[] = [];
   dataSource: MatTableDataSource<FactoryInterface>;
 
@@ -31,19 +31,12 @@ export class FactoryComponent implements OnInit {
 
   private getFactory(): void {
     try {
-      /* descomenta estas lineas cuando termines de agregar las rutas */
-      /* this._FACTORY_SERVICE.readFactory().subscribe( (value: FactoryInterface[]) => {
+      this._FACTORY_SERVICE.readFactory().subscribe( (value: FactoryInterface[]) => {
         if (value) {
           this.factory = value;
           this.dataSource = new MatTableDataSource<FactoryInterface>(this.factory);
           this.dataSource.paginator = this.paginator;
         }
-      }); */
-      this.factory.push({
-        id: 1,
-        name: 'BOSH',
-        ip: '190.113.91.36',
-        lastDateHistoryConsult: new Date()
       });
       this.dataSource = new MatTableDataSource<FactoryInterface>(this.factory);
       this.dataSource.paginator = this.paginator;
