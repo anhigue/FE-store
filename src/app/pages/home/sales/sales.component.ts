@@ -364,12 +364,13 @@ export class SalesComponent implements OnInit {
               client: this.clientOrder,
               clientId: this.clientOrder.id,
               date: new Date(),
-              productOrder: this.partOrder,
+              productSale: this.partOrder,
               statusId: 1,
               order: null,
               orderId: 0,
               total: this.getTotalCostParts()
             };
+            console.log(sale);
             this.createSale(sale);
           }
         });
@@ -407,6 +408,7 @@ export class SalesComponent implements OnInit {
                 name: 'Requerido'
               }
             };
+
             this.createOrder(order);
           }
         });
