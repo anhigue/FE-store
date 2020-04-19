@@ -46,5 +46,6 @@ export interface SaleInterface {
   client?: ClientInterface;
   productSale?: SaleProductInterface[];
   order?: OrderInterface;
+  isCredit?: boolean;
 }
 
