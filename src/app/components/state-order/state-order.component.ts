@@ -30,17 +30,12 @@ export class StateOrderComponent implements OnInit {
 
   private getState(): void {
     try {
-      /* descomenta estas lineas cuando termines de agregar las rutas */
-      /* this._STATE_SERVICE.readStateOrder().subscribe( (value: StateInterface[]) => {
+      this._STATE_SERVICE.readStateOrder().subscribe( (value: StateInterface[]) => {
         if (value) {
           this.states = value;
           this.dataSource = new MatTableDataSource<StateInterface>(this.states);
           this.dataSource.paginator = this.paginator;
         }
-      }); */
-      this.states.push({
-        id: 1,
-        name: 'finalizado'
       });
       this.dataSource = new MatTableDataSource<StateInterface>(this.states);
       this.dataSource.paginator = this.paginator;
