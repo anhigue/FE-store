@@ -27,5 +27,14 @@
             <input type="password" name="password" ngModel #password="ngModel" class="form-control" placeholder="Contraseña" required="required">
         </div>
     </div>
+    <div class="form-group">
+        <div class="form-label-group">
+            <label for="inputPassword">Rol</label>
+            <select class="custom-select" name="rol" ngModel #rol="ngModel">
+                <option value="" disabled>Escoge el rol</option>
+                <option *ngFor="let item of rols" [value]="item.id">{{item.name}}</option>
+             </select>
+        </div>
+    </div>
     <button class="btn btn-primary btn-block">Crear usuario</button>
 </form>
