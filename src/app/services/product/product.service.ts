@@ -45,4 +45,8 @@ export class ProductService {
   updateStockProduct(product: ProductInterface): Observable<any> {
     return this.http.put<any>(environment.API_BASE + '/product/stock', product, {headers: this.headers});
   }
+
+  readProductStoreFactory(): Observable<ProductInterface[]> {
+    return this.http.get<ProductInterface[]>(environment.API_BASE + '', {headers: this.headers});
+  }
 }

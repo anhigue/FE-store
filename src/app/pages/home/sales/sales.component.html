@@ -2,8 +2,17 @@
 <small>Realiza todas las acciones posibles con las ordenes de ventas</small>
 <hr>
 <mat-tab-group mat-align-tabs="start">
+  <!-- List o sales -->
   <mat-tab label="Listado de ventas">
     <app-sale></app-sale>
+  </mat-tab>
+  <!-- list order fabric -->
+  <mat-tab label="Listado de pedidos">
+    <app-order></app-order>
+  </mat-tab>
+  <!-- List credit orders -->
+  <mat-tab label="Listado de ventas al credito">
+    <app-credit-sale></app-credit-sale>
   </mat-tab>
   <!-- process to create a new order sale -->
   <mat-tab label="Nueva orden">
