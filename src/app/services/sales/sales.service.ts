@@ -29,19 +29,19 @@ export class SalesService {
   }
 
   newOrder(order: OrderInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', order, {
+    return this.http.post<any>(environment.API_BASE + '/request', order, {
       headers: this.headers,
     });
   }
 
   readSale(): Observable<SaleInterface[]> {
-    return this.http.get<SaleInterface[]>(environment.API_BASE + '', {
+    return this.http.get<SaleInterface[]>(environment.API_BASE + '/request', {
       headers: this.headers,
     });
   }
 
   updateSale(sale: SaleInterface): Observable<any> {
-    return this.http.put(environment.API_BASE + '', sale, {
+    return this.http.put(environment.API_BASE + '/request', sale, {
       headers: this.headers,
     });
   }
@@ -65,7 +65,7 @@ export class SalesService {
   }
 
   readOrder(): Observable<OrderInterface[]> {
-    return this.http.get<OrderInterface[]>(environment.API_BASE + '', {
+    return this.http.get<OrderInterface[]>(environment.API_BASE + '/request', {
       headers: this.headers,
     });
   }
@@ -73,6 +73,22 @@ export class SalesService {
   updateStateOrder(order: OrderInterface, state: number): Observable<any> {
     return this.http.put<any>(
       environment.API_BASE + '',
+      { order, state },
+      { headers: this.headers }
+    );
+  }
+
+  receibeRequest(order: OrderInterface, state: number): Observable<any> {
+    return this.http.put<any>(
+      environment.API_BASE + '/request/receive/' + order.id,
+      { order, state },
+      { headers: this.headers }
+    );
+  }
+
+  cancelRequest(order: OrderInterface, state: number): Observable<any> {
+    return this.http.put<any>(
+      environment.API_BASE + '/request/cancel/' + order.id,
       { order, state },
       { headers: this.headers }
     );

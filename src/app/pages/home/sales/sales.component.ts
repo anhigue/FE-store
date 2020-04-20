@@ -331,14 +331,12 @@ export class SalesComponent implements OnInit {
   private createOrder(order: OrderInterface): void {
     try {
       this._SALE_SERVICE.newOrder(order).subscribe((value: any) => {
-        if (value) {
-          this._DIALOG_SERVICE.shareData = {
-            title: 'Nuevo Pedido',
-            message:
-              'Se a realizado la orden de venta de repuestos con exito, actualiza el listado de pedidos para poder visualizar el pedido.'
-          };
-          this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
-        }
+        this._DIALOG_SERVICE.shareData = {
+          title: 'Nuevo Pedido',
+          message:
+            'Se a realizado la orden de venta de repuestos con exito, actualiza el listado de pedidos para poder visualizar el pedido.'
+        };
+        this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
       });
     } catch (error) {
       this._DIALOG_SERVICE.errorMessage(

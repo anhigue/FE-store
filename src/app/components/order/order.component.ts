@@ -56,9 +56,9 @@ export class OrderComponent implements OnInit {
   }
 
   private editOrder(order: OrderInterface, idState: number): void {
-    try {
-      this._SALE_SERVICE.updateStateOrder(order, idState).subscribe( (value: any) => {
-        if (value) {
+    if (idState === 2) {
+      try {
+        this._SALE_SERVICE.receibeRequest(order, idState).subscribe( (value: any) => {
           this._DIALOG_SERVICE.shareData = {
             title: 'Exitoso',
             message: 'Se ha actualizado el estado del pedido.',
@@ -66,14 +66,32 @@ export class OrderComponent implements OnInit {
           };
           this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
           this.getOrders();
-        }
-      });
-    } catch (error) {
-      this._DIALOG_SERVICE.errorMessage(
-        error,
-        'Error',
-        'Error al cambiar el estado del pedido.'
-      );
+        });
+      } catch (error) {
+        this._DIALOG_SERVICE.errorMessage(
+          error,
+          'Error',
+          'Error al cambiar el estado del pedido.'
+        );
+      }
+    } else {
+      try {
+        this._SALE_SERVICE.cancelRequest(order, idState).subscribe( (value: any) => {
+          this._DIALOG_SERVICE.shareData = {
+            title: 'Exitoso',
+            message: 'Se ha cancelado el pedido.',
+            data: {},
+          };
+          this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
+          this.getOrders();
+        });
+      } catch (error) {
+        this._DIALOG_SERVICE.errorMessage(
+          error,
+          'Error',
+          'Error al cancelar el pedido.'
+        );
+      }
     }
   }
 
