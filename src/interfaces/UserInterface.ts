@@ -1,3 +1,5 @@
+import { RolInterface } from './RolInterface';
+
 export class User {
 
     id?: number;
@@ -6,4 +8,5 @@ export class User {
     username?: string;
     password?: string;
     rolId?: number;
+    rol?: RolInterface;
 }
