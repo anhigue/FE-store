@@ -57,6 +57,7 @@ import { ClientService } from '../../services/client/client.service';
 import { FactorySelectComponent } from '../../components/factory-select/factory-select.component';
 import { CreditSaleComponent } from '../../components/credit-sale/credit-sale.component';
 import { OrderComponent } from '../../components/order/order.component';
+import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import { OrderComponent } from '../../components/order/order.component';
     StateOrderService,
     StateRequestService,
     FactoryService,
-    ClientService
+    ClientService,
+    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [HomeComponent]
 })

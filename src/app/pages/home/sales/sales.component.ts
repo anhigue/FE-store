@@ -78,6 +78,10 @@ export class SalesComponent implements OnInit {
     servicePassword: null
   };
 
+  /* totals */
+  totalCost = 0;
+  totalCostDiscount = 0;
+  stateCredit = false;
   /* table components */
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -369,7 +373,8 @@ export class SalesComponent implements OnInit {
               statusId: 1,
               order: null,
               orderId: 0,
-              total: this.getTotalCostParts()
+              total: this.totalCostDiscount,
+              isCredit: this.stateCredit
             };
             console.log(sale);
             this.createSale(sale);
@@ -420,5 +425,36 @@ export class SalesComponent implements OnInit {
         'Error al guardar la order.'
       );
     }
+  }
+
+  validateSub(): boolean {
+    try {
+      if (this.clientOrder.subscriptionId === 2) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      this._DIALOG_SERVICE.errorMessage(
+        JSON.stringify(error.name),
+        'Error',
+        'Error al validar la subscripcion'
+      );
+    }
+  }
+
+  updateValueCost(): void {
+    try {
+      const factor = (1 - (this.clientOrder.subscription.discount / 100));
+      this.totalCost = this.getTotalCostParts();
+      this.totalCostDiscount = this.totalCost * factor;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  toggle(event) {
+    console.log(event);
+    this.stateCredit = event.checked;
   }
 }
