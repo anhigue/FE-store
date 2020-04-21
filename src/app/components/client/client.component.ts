@@ -114,6 +114,7 @@ export class ClientComponent implements OnInit {
         .beforeClosed()
         .subscribe((value: ClientInterface) => {
           if (value) {
+            console.log(value);
             value.subscription = null;
             this.updateClient(value);
           }

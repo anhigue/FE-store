@@ -23,7 +23,7 @@ export class SalesService {
   }
 
   newSale(sale: SaleInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', sale, {
+    return this.http.post<any>(environment.API_BASE + '/sale', sale, {
       headers: this.headers,
     });
   }
@@ -35,7 +35,7 @@ export class SalesService {
   }
 
   readSale(): Observable<SaleInterface[]> {
-    return this.http.get<SaleInterface[]>(environment.API_BASE + '/request', {
+    return this.http.get<SaleInterface[]>(environment.API_BASE + '/sale', {
       headers: this.headers,
     });
   }
@@ -103,10 +103,10 @@ export class SalesService {
   }
 
   readCreditSales(): Observable<CreditSaleInterface[]> {
-    return this.http.get<any[]>(environment.API_BASE + '', { headers: this.headers });
+    return this.http.get<any[]>(environment.API_BASE + '/sale/credit', { headers: this.headers });
   }
 
   payCreditSale(creditSale: CreditSaleInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', creditSale, { headers: this.headers });
+    return this.http.delete<any>(environment.API_BASE + '/sale/credit/' + creditSale.id, { headers: this.headers });
   }
 }

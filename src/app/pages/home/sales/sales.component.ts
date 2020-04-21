@@ -313,14 +313,12 @@ export class SalesComponent implements OnInit {
   private createSale(sale: SaleInterface): void {
     try {
       this._SALE_SERVICE.newSale(sale).subscribe((value: any) => {
-        if (value) {
-          this._DIALOG_SERVICE.shareData = {
+        this._DIALOG_SERVICE.shareData = {
             title: 'Nueva venta',
             message:
               'Se a realizado la orden de venta de repuestos con exito, actualiza el listado de ordenes para poder visualizar la orden.'
           };
           this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
-        }
       });
     } catch (error) {
       this._DIALOG_SERVICE.errorMessage(
@@ -341,6 +339,12 @@ export class SalesComponent implements OnInit {
             'Se a realizado la orden de venta de repuestos con exito, actualiza el listado de pedidos para poder visualizar el pedido.'
         };
         this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
+      }, error => {
+        this._DIALOG_SERVICE.errorMessage(
+          JSON.stringify(error.name),
+          'Error',
+          'Error al guardar el pedido.'
+        );
       });
     } catch (error) {
       this._DIALOG_SERVICE.errorMessage(
@@ -355,7 +359,7 @@ export class SalesComponent implements OnInit {
   wantSaveSale(): void {
     try {
       this._DIALOG_SERVICE.shareData = {
-        title: 'Guardad',
+        title: 'Guardar',
         message: 'Estas seguro de que quieres guardar esta orden',
         data: null
       };
@@ -429,7 +433,8 @@ export class SalesComponent implements OnInit {
 
   validateSub(): boolean {
     try {
-      if (this.clientOrder.subscriptionId === 2) {
+      console.log(this.clientOrder);
+      if (this.clientOrder.subscription.id === 2) {
         return true;
       } else {
         return false;

@@ -19,7 +19,6 @@ export class CreditSaleComponent implements OnInit {
     'position',
     'client',
     'sale',
-    'state',
     'options',
   ];
 
@@ -58,15 +57,13 @@ export class CreditSaleComponent implements OnInit {
   private editCreditSale(creditSale: CreditSaleInterface): void {
     try {
       this._SALE_SERVICE.payCreditSale(creditSale).subscribe( (value: any) => {
-        if (value) {
-          this._DIALOG_SERVICE.shareData = {
-            title: 'Exitoso',
-            message: 'Se a cancelado el credito de la orden.',
-            data: {},
-          };
-          this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
-          this.getCreditSale();
-        }
+        this._DIALOG_SERVICE.shareData = {
+          title: 'Exitoso',
+          message: 'Se a cancelado el credito de la orden.',
+          data: {},
+        };
+        this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
+        this.getCreditSale();
       });
     } catch (error) {
       this._DIALOG_SERVICE.errorMessage(
