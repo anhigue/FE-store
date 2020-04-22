@@ -58,6 +58,7 @@ import { FactorySelectComponent } from '../../components/factory-select/factory-
 import { CreditSaleComponent } from '../../components/credit-sale/credit-sale.component';
 import { OrderComponent } from '../../components/order/order.component';
 import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material/checkbox';
+import { OrderProductDialogComponent } from '../../components/order-product-dialog/order-product-dialog.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material/checkbox';
     FactorySelectComponent,
     CreditSaleComponent,
     OrderComponent,
+    OrderProductDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -129,6 +131,7 @@ import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material/checkbox';
     FactoryDialogComponent,
     ClientSelectOrderComponent,
     FactorySelectComponent,
+    OrderProductDialogComponent,
   ],
   providers: [
     VehicleService,

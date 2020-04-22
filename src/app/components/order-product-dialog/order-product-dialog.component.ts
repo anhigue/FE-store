@@ -1,19 +1,21 @@
 import { VehicleInterface } from './../../../interfaces/VehicleInterface';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild, Input, Inject } from '@angular/core';
 import { ProductInterface } from '../../../interfaces/ProductInterface';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
 import { ProductService } from '../../services/product/product.service';
 import { DialogService } from '../../services/dialog/dialog.service';
-import { MatSort } from '@angular/material/sort';
 import { VehicleService } from '../../services/vehicle/vehicle.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FactoryInterface } from '../../../interfaces/FactoryInterface';
 
 @Component({
-  selector: 'app-sales-product-dialog',
-  templateUrl: './sales-product-dialog.component.html',
-  styleUrls: ['./sales-product-dialog.component.scss'],
+  selector: 'app-order-product-dialog',
+  templateUrl: './order-product-dialog.component.html',
+  styleUrls: ['./order-product-dialog.component.scss']
 })
-export class SalesProductDialogComponent implements OnInit {
+export class OrderProductDialogComponent implements OnInit {
   displayedColumns: string[] = [
     'position',
     'name',
@@ -39,9 +41,12 @@ export class SalesProductDialogComponent implements OnInit {
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
+    public dialogRef: MatDialogRef<OrderProductDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: FactoryInterface,
     private _DIALOG_SERVICE: DialogService,
     private _PRODUCT_SERVICE: ProductService,
-    private _VEHICLE_SERVICE: VehicleService
+    private _VEHICLE_SERVICE: VehicleService,
+
   ) {}
 
   ngOnInit() {
@@ -72,7 +77,7 @@ export class SalesProductDialogComponent implements OnInit {
     try {
       /* descomenta estas lineas cuando termines de agregar las rutas */
       this._PRODUCT_SERVICE
-        .readProduct()
+        .readProductStoreFactory(this.data)
         .subscribe((value: ProductInterface[]) => {
           if (value) {
             this.products = value;
@@ -212,4 +217,5 @@ export class SalesProductDialogComponent implements OnInit {
       );
     }
   }
+
 }
