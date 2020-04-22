@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { ProductInterface } from '../../../interfaces/ProductInterface';
+import { FactoryInterface } from '../../../interfaces/FactoryInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class ProductService {
     return this.http.put<any>(environment.API_BASE + '/product/stock', product, {headers: this.headers});
   }
 
-  readProductStoreFactory(): Observable<ProductInterface[]> {
-    return this.http.get<ProductInterface[]>(environment.API_BASE + '', {headers: this.headers});
+  readProductStoreFactory(factory: FactoryInterface): Observable<ProductInterface[]> {
+    return this.http.get<ProductInterface[]>(environment.API_BASE + '' + factory.id, {headers: this.headers});
   }
 }

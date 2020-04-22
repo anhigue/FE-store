@@ -20,6 +20,7 @@ export class OrderComponent implements OnInit {
     'factory',
     'status',
     'timeCreate',
+    'list',
     'options',
   ];
 

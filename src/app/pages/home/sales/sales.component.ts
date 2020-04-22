@@ -17,6 +17,8 @@ import { FactoryInterface } from '../../../../interfaces/FactoryInterface';
 import { FactorySelectComponent } from '../../../components/factory-select/factory-select.component';
 import { OrderProductInterface, CreditSaleInterface } from '../../../../interfaces/SaleInterface';
 import { MatSort } from '@angular/material/sort';
+import { ComponentType } from '@angular/cdk/portal';
+import { OrderProductDialogComponent } from '../../../components/order-product-dialog/order-product-dialog.component';
 
 @Component({
   selector: 'app-sales',
@@ -218,10 +220,21 @@ export class SalesComponent implements OnInit {
     }
   }
 
-  wantSelectPart(): void {
+  wantSelectPart(type: number): void {
     try {
+
+      let  comp: ComponentType<unknown>;
+
+      if (type === 1) {
+        comp = SalesProductDialogComponent;
+        this._DIALOG_SERVICE.shareData = {};
+      } else {
+        comp = OrderProductDialogComponent;
+        this._DIALOG_SERVICE.shareData = this.factoryCreate;
+      }
+
       this._DIALOG_SERVICE
-        .openDialog(SalesProductDialogComponent)
+        .openDialog(comp)
         .beforeClosed()
         .subscribe((value: any) => {
           if (value) {

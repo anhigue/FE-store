@@ -19,6 +19,7 @@ export class SaleComponent implements OnInit {
     'date',
     'total',
     'client',
+    'list',
     'options',
   ];
   sales: SaleInterface[] = [];
@@ -53,7 +54,7 @@ export class SaleComponent implements OnInit {
       );
     }
   }
-  
+
   wantUpdate(sale: SaleInterface, message: string, idState: number): void {
     try {
       this._DIALOG_SERVICE.shareData = {
