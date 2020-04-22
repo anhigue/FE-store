@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit {
     'partNo',
     'price',
     'stock',
+    'factory',
     'options'
   ];
   products: ProductInterface[] = [];

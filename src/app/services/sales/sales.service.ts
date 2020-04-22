@@ -8,6 +8,7 @@ import {
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { CreditSaleInterface } from '../../../interfaces/SaleInterface';
+import { ClientInterface } from 'src/interfaces/ClientInterface';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,12 @@ export class SalesService {
       'Content-Type',
       'application/json; charset=utf-8HttpClient'
     );
+  }
+
+  checkAvailableSale(clientId: number): Observable<boolean> {
+    return this.http.get<boolean>(environment.API_BASE + '/sale/client/available/' + clientId, {
+      headers: this.headers
+    });
   }
 
   newSale(sale: SaleInterface): Observable<any> {

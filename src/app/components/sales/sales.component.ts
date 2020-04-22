@@ -19,6 +19,7 @@ export class SaleComponent implements OnInit {
     'date',
     'total',
     'client',
+    'status',
     'options',
   ];
   sales: SaleInterface[] = [];
