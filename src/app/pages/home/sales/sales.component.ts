@@ -129,6 +129,7 @@ export class SalesComponent implements OnInit {
         .subscribe((value: any) => {
           if (value) {
             this.clientOrder = value;
+            this.checkAvailable(this.clientOrder.id);
           }
         });
     } catch (error) {
@@ -137,6 +138,27 @@ export class SalesComponent implements OnInit {
         JSON.stringify(error.name),
         'Error',
         'Error al seleccionar un cliente existente.'
+      );
+    }
+  }
+
+  checkAvailable(clientId: number): void {
+    try {
+      this._SALE_SERVICE.checkAvailableSale(clientId).subscribe((value: boolean) => {
+        if (value) {
+          this._DIALOG_SERVICE.shareData = {
+            title: 'Ordenes disponibles',
+            message:
+              'El cliente tiene ordenes disponibles para su entrega.'
+          };
+          this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
+        } 
+      });
+    } catch (error) {
+      this._DIALOG_SERVICE.errorMessage(
+        JSON.stringify(error.name),
+        'Error',
+        'Error al guardar la order.'
       );
     }
   }
@@ -255,7 +277,8 @@ export class SalesComponent implements OnInit {
                 price: null,
                 stock: null,
                 vehicleId: null,
-                vehicles: null
+                vehicles: null,
+                fabricId: null
               },
               productId: null,
               stockSale: 0

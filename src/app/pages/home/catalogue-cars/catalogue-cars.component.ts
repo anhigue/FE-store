@@ -13,6 +13,8 @@ import { VehicleComponent } from 'src/app/components/vehicle/vehicle.component';
 import { DialogCustomComponent } from 'src/app/components/dialog-custom/dialog-custom.component';
 import { LineService } from '../../../services/line/line.service';
 import { BrandService } from '../../../services/brand/brand.service';
+import { FactoryInterface } from 'src/interfaces/FactoryInterface';
+import { FactoryService } from 'src/app/services/factory/factory.service';
 
 @Component({
   selector: 'app-catalogue-cars',
