@@ -57,7 +57,8 @@ export class SalesComponent implements OnInit {
       price: null,
       stock: null,
       vehicleId: null,
-      vehicles: null
+      vehicles: null,
+      fabricId: null
     },
     productId: null,
     stockSale: 0

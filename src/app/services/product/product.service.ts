@@ -48,6 +48,6 @@ export class ProductService {
   }
 
   readProductStoreFactory(factory: FactoryInterface): Observable<ProductInterface[]> {
-    return this.http.get<ProductInterface[]>(environment.API_BASE + '' + factory.id, {headers: this.headers});
+    return this.http.get<ProductInterface[]>(environment.API_BASE + '/product/fabric/' + factory.id, {headers: this.headers});
   }
 }

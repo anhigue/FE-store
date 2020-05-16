@@ -68,7 +68,7 @@ export class SaleComponent implements OnInit {
         .beforeClosed()
         .subscribe((value: SaleInterface) => {
           if (value) {
-            this.updateSale(sale, idState);
+            this.updateSale(sale);
           }
         });
     } catch (error) {
@@ -80,15 +80,15 @@ export class SaleComponent implements OnInit {
     }
   }
 
-  private updateSale(sale: SaleInterface, idState: number) {
+  private updateSale(sale: SaleInterface) {
     try {
       this._SALE_SERVICE
-        .updateStateSale(sale, idState)
+        .deliverSale(sale)
         .subscribe((value: any) => {
           if (value) {
             this._DIALOG_SERVICE.shareData = {
               title: 'Exitoso',
-              message: 'Se ha actualizado el estado de la orden.',
+              message: 'Se ha entregado la orden.',
               data: {},
             };
             this._DIALOG_SERVICE.openDialog(DialogCustomComponent);

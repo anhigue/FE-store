@@ -49,20 +49,6 @@ export class ProductComponent implements OnInit {
           this.dataSource.paginator = this.paginator;
         }
       });
-      this.products.push({
-        id: 1,
-        name: 'Anibal Higueros',
-        vehicles: [
-          {
-            universalCode: 'AADDSSkS',
-            brand: {},
-            line: {},
-            year: 2002,
-            lineId: 1,
-            brandId: 1
-          }
-        ]
-      });
       this.dataSource = new MatTableDataSource<ProductInterface>(this.products);
       this.dataSource.paginator = this.paginator;
     } catch (error) {
@@ -91,6 +77,8 @@ export class ProductComponent implements OnInit {
         .beforeClosed()
         .subscribe((value: ProductInterface) => {
           if (value) {
+            value.fabricId = value.fabric.id;
+            value.fabric = null;
             this.createProduct(value);
           }
         });
@@ -120,6 +108,8 @@ export class ProductComponent implements OnInit {
         .beforeClosed()
         .subscribe((value: ProductInterface) => {
           if (value) {
+            value.fabricId = value.fabric.id;
+            value.fabric = null;
             this.updateProduct(value);
           }
         });
@@ -221,13 +211,15 @@ export class ProductComponent implements OnInit {
           if (value.type === 'delete') {
             const deleteVehicle = {
               id: product.id,
-              universalCode: value.data.universalCode
+              universalCode: value.data.universalCode,
+              fabricId: null
             };
             this.UnAssignVehicle(deleteVehicle);
           } else if (value.type === 'assign') {
             const assignVehicle = {
               id: product.id,
-              universalCode: value.data.universalCode
+              universalCode: value.data.universalCode,
+              fabricId: null
             };
             this.assignVehicle(assignVehicle);
           }

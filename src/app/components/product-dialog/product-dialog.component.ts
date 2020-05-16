@@ -37,6 +37,11 @@ export class ProductDialogComponent implements OnInit {
     });
     
     this.getFabric();
+    if (this.partUpdate.fabric == null) {
+      this.partUpdate.fabric = {
+        ip: null
+      };
+    }
   }
 
   getFabric(): void {

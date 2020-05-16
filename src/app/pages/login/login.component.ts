@@ -26,19 +26,19 @@ export class LoginComponent implements OnInit {
     this.user.username = f.value.username;
     this.user.password = f.value.password;
 
-    this.router.navigateByUrl('/home');
-
-    /* this.userService.LogIn(this.user).subscribe(
+    this.userService.LogIn(this.user).subscribe(
       response => {
         this.user.id = response.id;
         this.user.firstName = response.firstName;
         this.user.lastName = response.lastName;
         this.user.username = response.username;
+        this.user.rolId = response.rol.id;
+        this.user.rol = response.rol;
         this.userService.setLogIn(this.user);
       }, error => {
         console.log(error);
       }
-    ); */
+    );
   }
 
 }
