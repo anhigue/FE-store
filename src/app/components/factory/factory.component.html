@@ -14,9 +14,9 @@
     <td mat-cell *matCellDef="let element"> {{element.ip}} </td>
   </ng-container>
 
-  <ng-container matColumnDef="lastDateConsult">
+  <ng-container matColumnDef="lastDateRequest">
     <th mat-header-cell *matHeaderCellDef> Ultimo dia de consulta</th>
-    <td mat-cell *matCellDef="let element"> {{element.lastDateHistoryConsult | date: 'dd/MM/yyy'}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.lastDateRequest | date: 'dd/MM/yyy'}} </td>
   </ng-container>
 
   <ng-container matColumnDef="options">

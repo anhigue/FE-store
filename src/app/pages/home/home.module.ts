@@ -55,6 +55,10 @@ import { FactoryDialogComponent } from '../../components/factory-dialog/factory-
 import { ClientSelectOrderComponent } from '../../components/client-select/client-select.component';
 import { ClientService } from '../../services/client/client.service';
 import { FactorySelectComponent } from '../../components/factory-select/factory-select.component';
+import { CreditSaleComponent } from '../../components/credit-sale/credit-sale.component';
+import { OrderComponent } from '../../components/order/order.component';
+import { MAT_CHECKBOX_CLICK_ACTION } from '@angular/material/checkbox';
+import { OrderProductDialogComponent } from '../../components/order-product-dialog/order-product-dialog.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +96,9 @@ import { FactorySelectComponent } from '../../components/factory-select/factory-
     FactoryDialogComponent,
     ClientSelectOrderComponent,
     FactorySelectComponent,
+    CreditSaleComponent,
+    OrderComponent,
+    OrderProductDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -124,6 +131,7 @@ import { FactorySelectComponent } from '../../components/factory-select/factory-
     FactoryDialogComponent,
     ClientSelectOrderComponent,
     FactorySelectComponent,
+    OrderProductDialogComponent,
   ],
   providers: [
     VehicleService,
@@ -140,7 +148,8 @@ import { FactorySelectComponent } from '../../components/factory-select/factory-
     StateOrderService,
     StateRequestService,
     FactoryService,
-    ClientService
+    ClientService,
+    {provide: MAT_CHECKBOX_CLICK_ACTION, useValue: 'check'}
   ],
   bootstrap: [HomeComponent]
 })

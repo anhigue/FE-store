@@ -30,18 +30,13 @@ export class BrandComponent implements OnInit {
 
   private getBrand(): void {
     try {
-      /* descomenta estas lineas cuando termines de agregar las rutas */
-      /* this._BRAND_SERVICE.readBrand().subscribe( (value: BrandInterface[]) => {
+      this._BRAND_SERVICE.readBrand().subscribe( (value: BrandInterface[]) => {
         if (value) {
           this.brand = value;
           this.dataSource = new MatTableDataSource<BrandInterface>(this.brand);
           this.dataSource.paginator = this.paginator;
         }
-      }); */
-      this.brand.push({
-        id: 1,
-        name: 'Ford'
-      });
+      }); 
       this.dataSource = new MatTableDataSource<BrandInterface>(this.brand);
       this.dataSource.paginator = this.paginator;
     } catch (error) {

@@ -15,7 +15,10 @@ import { ClientSelectOrderComponent } from '../../../components/client-select/cl
 import { DialogCustomComponent } from 'src/app/components/dialog-custom/dialog-custom.component';
 import { FactoryInterface } from '../../../../interfaces/FactoryInterface';
 import { FactorySelectComponent } from '../../../components/factory-select/factory-select.component';
-import { OrderProductInterface } from '../../../../interfaces/SaleInterface';
+import { OrderProductInterface, CreditSaleInterface } from '../../../../interfaces/SaleInterface';
+import { MatSort } from '@angular/material/sort';
+import { ComponentType } from '@angular/cdk/portal';
+import { OrderProductDialogComponent } from '../../../components/order-product-dialog/order-product-dialog.component';
 
 @Component({
   selector: 'app-sales',
@@ -54,7 +57,8 @@ export class SalesComponent implements OnInit {
       price: null,
       stock: null,
       vehicleId: null,
-      vehicles: null
+      vehicles: null,
+      fabricId: null
     },
     productId: null,
     stockSale: 0
@@ -68,16 +72,22 @@ export class SalesComponent implements OnInit {
     'options'
   ];
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
   factoryValidate: FormGroup;
   factoryCreate: FactoryInterface = {
     ip: null,
-    lastDateHistoryConsult: null,
+    lastDateRequest: null,
     id: null,
     name: null,
-    passwordService: null
+    servicePassword: null
   };
+
+  /* totals */
+  totalCost = 0;
+  totalCostDiscount = 0;
+  stateCredit = false;
+  /* table components */
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private _FORM_BUILDER: FormBuilder,
@@ -120,6 +130,7 @@ export class SalesComponent implements OnInit {
         .subscribe((value: any) => {
           if (value) {
             this.clientOrder = value;
+            this.checkAvailable(this.clientOrder.id);
           }
         });
     } catch (error) {
@@ -128,6 +139,27 @@ export class SalesComponent implements OnInit {
         JSON.stringify(error.name),
         'Error',
         'Error al seleccionar un cliente existente.'
+      );
+    }
+  }
+
+  checkAvailable(clientId: number): void {
+    try {
+      this._SALE_SERVICE.checkAvailableSale(clientId).subscribe((value: boolean) => {
+        if (value) {
+          this._DIALOG_SERVICE.shareData = {
+            title: 'Ordenes disponibles',
+            message:
+              'El cliente tiene ordenes disponibles para su entrega.'
+          };
+          this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
+        } 
+      });
+    } catch (error) {
+      this._DIALOG_SERVICE.errorMessage(
+        JSON.stringify(error.name),
+        'Error',
+        'Error al guardar la order.'
       );
     }
   }
@@ -211,10 +243,21 @@ export class SalesComponent implements OnInit {
     }
   }
 
-  wantSelectPart(): void {
+  wantSelectPart(type: number): void {
     try {
+
+      let  comp: ComponentType<unknown>;
+
+      if (type === 1) {
+        comp = SalesProductDialogComponent;
+        this._DIALOG_SERVICE.shareData = {};
+      } else {
+        comp = OrderProductDialogComponent;
+        this._DIALOG_SERVICE.shareData = this.factoryCreate;
+      }
+
       this._DIALOG_SERVICE
-        .openDialog(SalesProductDialogComponent)
+        .openDialog(comp)
         .beforeClosed()
         .subscribe((value: any) => {
           if (value) {
@@ -235,7 +278,8 @@ export class SalesComponent implements OnInit {
                 price: null,
                 stock: null,
                 vehicleId: null,
-                vehicles: null
+                vehicles: null,
+                fabricId: null
               },
               productId: null,
               stockSale: 0
@@ -306,14 +350,12 @@ export class SalesComponent implements OnInit {
   private createSale(sale: SaleInterface): void {
     try {
       this._SALE_SERVICE.newSale(sale).subscribe((value: any) => {
-        if (value) {
-          this._DIALOG_SERVICE.shareData = {
+        this._DIALOG_SERVICE.shareData = {
             title: 'Nueva venta',
             message:
               'Se a realizado la orden de venta de repuestos con exito, actualiza el listado de ordenes para poder visualizar la orden.'
           };
           this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
-        }
       });
     } catch (error) {
       this._DIALOG_SERVICE.errorMessage(
@@ -328,14 +370,18 @@ export class SalesComponent implements OnInit {
   private createOrder(order: OrderInterface): void {
     try {
       this._SALE_SERVICE.newOrder(order).subscribe((value: any) => {
-        if (value) {
-          this._DIALOG_SERVICE.shareData = {
-            title: 'Nuevo Pedido',
-            message:
-              'Se a realizado la orden de venta de repuestos con exito, actualiza el listado de pedidos para poder visualizar el pedido.'
-          };
-          this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
-        }
+        this._DIALOG_SERVICE.shareData = {
+          title: 'Nuevo Pedido',
+          message:
+            'Se a realizado la orden de venta de repuestos con exito, actualiza el listado de pedidos para poder visualizar el pedido.'
+        };
+        this._DIALOG_SERVICE.openDialog(DialogCustomComponent);
+      }, error => {
+        this._DIALOG_SERVICE.errorMessage(
+          JSON.stringify(error.name),
+          'Error',
+          'Error al guardar el pedido.'
+        );
       });
     } catch (error) {
       this._DIALOG_SERVICE.errorMessage(
@@ -350,7 +396,7 @@ export class SalesComponent implements OnInit {
   wantSaveSale(): void {
     try {
       this._DIALOG_SERVICE.shareData = {
-        title: 'Guardad',
+        title: 'Guardar',
         message: 'Estas seguro de que quieres guardar esta orden',
         data: null
       };
@@ -364,12 +410,14 @@ export class SalesComponent implements OnInit {
               client: this.clientOrder,
               clientId: this.clientOrder.id,
               date: new Date(),
-              productOrder: this.partOrder,
+              productSale: this.partOrder,
               statusId: 1,
               order: null,
               orderId: 0,
-              total: this.getTotalCostParts()
+              total: this.totalCostDiscount,
+              isCredit: this.stateCredit
             };
+            console.log(sale);
             this.createSale(sale);
           }
         });
@@ -407,6 +455,7 @@ export class SalesComponent implements OnInit {
                 name: 'Requerido'
               }
             };
+
             this.createOrder(order);
           }
         });
@@ -417,5 +466,37 @@ export class SalesComponent implements OnInit {
         'Error al guardar la order.'
       );
     }
+  }
+
+  validateSub(): boolean {
+    try {
+      console.log(this.clientOrder);
+      if (this.clientOrder.subscription.id === 2) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (error) {
+      this._DIALOG_SERVICE.errorMessage(
+        JSON.stringify(error.name),
+        'Error',
+        'Error al validar la subscripcion'
+      );
+    }
+  }
+
+  updateValueCost(): void {
+    try {
+      const factor = (1 - (this.clientOrder.subscription.discount / 100));
+      this.totalCost = this.getTotalCostParts();
+      this.totalCostDiscount = this.totalCost * factor;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  toggle(event) {
+    console.log(event);
+    this.stateCredit = event.checked;
   }
 }

@@ -2,13 +2,22 @@
 <small>Realiza todas las acciones posibles con las ordenes de ventas</small>
 <hr>
 <mat-tab-group mat-align-tabs="start">
+  <!-- List o sales -->
   <mat-tab label="Listado de ventas">
     <app-sale></app-sale>
+  </mat-tab>
+  <!-- list order fabric -->
+  <mat-tab label="Listado de pedidos">
+    <app-order></app-order>
+  </mat-tab>
+  <!-- List credit orders -->
+  <mat-tab label="Listado de ventas al credito">
+    <app-credit-sale></app-credit-sale>
   </mat-tab>
   <!-- process to create a new order sale -->
   <mat-tab label="Nueva orden">
     <!-- create a new order  -->
-    <mat-vertical-stepper [linear]="false" #stepper>
+    <mat-vertical-stepper [linear]="true" #stepper>
       <mat-step [stepControl]="clientOrderValidate">
         <form [formGroup]="clientOrderValidate">
           <ng-template matStepLabel>Datos preliminares de la orden</ng-template>
@@ -63,7 +72,7 @@
           <ng-template matStepLabel>Repuestos a solicitar</ng-template>
           <div class="row">
             <div class="col-md-12">
-              <button mat-button id="btn-add" class="float-left" (click)="wantSelectPart();"><em
+              <button mat-button id="btn-add" class="float-left" (click)="wantSelectPart(1);"><em
                   class="material-icons">add_circle</em> Agregar un repuesto a la orden</button>
             </div>
           </div>
@@ -81,7 +90,7 @@
                   <th mat-header-cell *matHeaderCellDef> C/U</th>
                   <td mat-cell *matCellDef="let element">
                     <input type="number" [(ngModel)]="partOrder[partOrder.indexOf(element)].priceSale"
-                      [ngModelOptions]="{standalone: true}" (change)="onChangeParInfo(element);">
+                      [ngModelOptions]="{standalone: true}" (change)="onChangeParInfo(element);" disabled>
                   </td>
                 </ng-container>
 
@@ -98,7 +107,7 @@
                   <td mat-cell *matCellDef="let element">
                     <input type="number"
                       [ngModel]="(partOrder[partOrder.indexOf(element)].priceSale * partOrder[partOrder.indexOf(element)].stockSale)"
-                      [ngModelOptions]="{standalone: true}">
+                      [ngModelOptions]="{standalone: true}" disabled>
                   </td>
                 </ng-container>
 
@@ -124,9 +133,37 @@
           </div>
           <div>
             <button mat-button matStepperPrevious>Regresar</button>
-            <button mat-button matStepperNext (click)="wantSaveSale()">Guardar</button>
+            <button mat-button matStepperNext color="primary" (click)="updateValueCost();" >Continuar</button>
           </div>
         </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel >Credito y descuento</ng-template>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-checkbox *ngIf="validateSub();" [checked]="stateCredit" (change)="toggle($event)">Habilitar compra al credito</mat-checkbox>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Total sin descuento</mat-label>
+              <input matInput type="number" [(ngModel)]="totalCost" disabled >
+            </mat-form-field>
+          </div>
+          <div class="col-md-6">
+            <mat-form-field class="example-full-width">
+              <mat-label>Total con descuento</mat-label>
+              <input matInput type="number" [(ngModel)]="totalCostDiscount" disabled >
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <button mat-button matStepperPrevious>Regresar</button>
+            <button mat-button matStepperNext (click)="wantSaveSale()">Guardar</button>
+          </div>
+        </div>
       </mat-step>
     </mat-vertical-stepper>
   </mat-tab>
@@ -161,7 +198,7 @@
             <div class="col-md-4">
               <mat-form-field>
                 <input matInput placeholder="Contrasena" type="password" required formControlName="passwordService"
-                  [(ngModel)]="factoryCreate.passwordService" />
+                  [(ngModel)]="factoryCreate.servicePassword" />
               </mat-form-field>
             </div>
           </div>
@@ -175,7 +212,7 @@
           <ng-template matStepLabel>Repuestos a solicitar</ng-template>
           <div class="row">
             <div class="col-md-12">
-              <button mat-button id="btn-add" class="float-left" (click)="wantSelectPart();"><em
+              <button mat-button id="btn-add" class="float-left" (click)="wantSelectPart(2);"><em
                   class="material-icons">add_circle</em> Agregar un repuesto a la orden</button>
             </div>
           </div>
@@ -193,7 +230,7 @@
                   <th mat-header-cell *matHeaderCellDef> C/U</th>
                   <td mat-cell *matCellDef="let element">
                     <input type="number" [(ngModel)]="partOrder[partOrder.indexOf(element)].priceSale"
-                      [ngModelOptions]="{standalone: true}" (change)="onChangeParInfo(element);">
+                      [ngModelOptions]="{standalone: true}" (change)="onChangeParInfo(element);" disabled>
                   </td>
                 </ng-container>
 
@@ -210,7 +247,7 @@
                   <td mat-cell *matCellDef="let element">
                     <input type="number"
                       [ngModel]="(partOrder[partOrder.indexOf(element)].priceSale * partOrder[partOrder.indexOf(element)].stockSale)"
-                      [ngModelOptions]="{standalone: true}">
+                      [ngModelOptions]="{standalone: true}" disabled>
                   </td>
                 </ng-container>
 

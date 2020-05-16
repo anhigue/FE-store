@@ -22,11 +22,9 @@ export class FactoryDialogComponent implements OnInit {
   ngOnInit() {
     this.factoryUpdate = this.data;
     this.formGroupFactory = this._FORM_BUILDER.group({
-      id: ['', Validators.required],
       name: ['', Validators.required],
       ip: ['', Validators.required],
       password: ['', Validators.required],
-      lastConsult: ['', Validators.required],
     });
   }
 }

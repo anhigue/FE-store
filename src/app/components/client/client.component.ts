@@ -105,6 +105,39 @@ export class ClientComponent implements OnInit {
     }
   }
 
+  wantRenovateSubscription(sub: ClientInterface) {
+    try {
+      this._DIALOG_SERVICE.shareData = {
+        title: 'Desea renovar la subscripción del cliente',
+        message: 'Estas seguro que quieres renovar la subscripción del cliente.',
+        data: {}
+      };
+      this._DIALOG_SERVICE
+        .openDialog(DialogCustomComponent)
+        .beforeClosed()
+        .subscribe((value: any) => {
+          if (value) {
+            this.deleteClient(sub);
+          }
+        });
+    } catch (error) {
+      this.errorMessage(error, 'Error', 'Error al renovar al cliente.');
+    }
+  }
+
+  private renovateSubsription(rol: ClientInterface) {
+    try {
+      this._CLIENT_SERVICE.deleteClient(rol).subscribe((value: any) => {
+        if (value) {
+          /* message delete here */
+          this.getClient();
+        }
+      });
+    } catch (error) {
+      this.errorMessage(error, 'Error', 'Error al eliminar un cliente.');
+    }
+  }
+
   wantUpdate(sub: ClientInterface) {
     try {
       sub.subscriptionId = sub.subscription.id;
@@ -114,6 +147,7 @@ export class ClientComponent implements OnInit {
         .beforeClosed()
         .subscribe((value: ClientInterface) => {
           if (value) {
+            console.log(value);
             value.subscription = null;
             this.updateClient(value);
           }

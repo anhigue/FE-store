@@ -1,6 +1,6 @@
 export const environment = {
-  production: true,
-  API_BASE: 'http://localhost:8080',
+  production: false,
+  API_BASE: 'http://25.137.124.65:5000/store3',
   KEY_JSON: 'SIE_PASS',
   algorithm: 'aes256',
   encoding: 'hex',

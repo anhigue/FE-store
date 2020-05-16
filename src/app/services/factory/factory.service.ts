@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FactoryInterface } from '../../../interfaces/FactoryInterface';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
+import { ProductInterface } from '../../../interfaces/ProductInterface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,18 +21,22 @@ export class FactoryService {
   }
 
   newFactory(factory: FactoryInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', factory, {headers: this.headers});
+    return this.http.post<any>(environment.API_BASE + '/fabric', factory, {headers: this.headers});
   }
 
   readFactory(): Observable<any> {
-    return this.http.get<any>(environment.API_BASE + '', {headers: this.headers});
+    return this.http.get<any>(environment.API_BASE + '/fabric', {headers: this.headers});
   }
 
   updateFactory(factory: FactoryInterface): Observable<any> {
-    return this.http.put<any>(environment.API_BASE + '', factory, {headers: this.headers});
+    return this.http.put<any>(environment.API_BASE + '/fabric', factory, {headers: this.headers});
   }
 
   deleteFactory(factory: FactoryInterface): Observable<any> {
-    return this.http.delete<any>(environment.API_BASE + '' + factory.id, {headers: this.headers});
+    return this.http.delete<any>(environment.API_BASE + '/fabric/' + factory.id, {headers: this.headers});
+  }
+
+  readFactoryProduct(factory: FactoryInterface): Observable<ProductInterface[]> {
+    return this.http.get<any[]>(environment.API_BASE + '/' + factory.id, {headers: this.headers});
   }
 }

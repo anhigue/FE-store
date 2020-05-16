@@ -1,0 +1,35 @@
+<table mat-table [dataSource]="dataSourceCreditSale" matSort>
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="client">
+    <th mat-header-cell *matHeaderCellDef> cliente </th>
+    <td mat-cell *matCellDef="let element"> {{element.client.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="sale">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Orden de repuesto </th>
+    <td mat-cell *matCellDef="let element"> {{element.sale.total}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="options">
+    <th mat-header-cell *matHeaderCellDef> Opciones </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-menu #appMenuCoin="matMenu">
+        <ng-template matMenuContent>
+          <button mat-menu-item (click)="wantEdit(element);" >Cancelar credito</button>
+        </ng-template>
+      </mat-menu>
+      <button mat-icon-button [matMenuTriggerFor]="appMenuCoin">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumnsCreditSale"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumnsCreditSale;"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

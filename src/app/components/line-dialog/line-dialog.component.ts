@@ -22,7 +22,6 @@ export class LineDialogComponent implements OnInit {
   ngOnInit() {
     this.lineUpdate = this.data;
     this.formGroupLine = this._FORM_BUILDER.group({
-      id: ['', Validators.required],
       name: ['', Validators.required],
     });
   }

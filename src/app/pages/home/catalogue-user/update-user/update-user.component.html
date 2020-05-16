@@ -21,5 +21,14 @@
             <input type="text" name="username" [ngModel]="username" class="form-control" placeholder="Correo" required="required" autofocus="autofocus">
         </div>
     </div>
+    <div class="form-group">
+        <div class="form-label-group">
+            <label for="inputPassword">Rol</label>
+            <select class="custom-select" name="rol" [(ngModel)]="rol">
+                <option value="" disabled>Escoge el rol</option>
+                <option *ngFor="let item of rols" [value]="item.id">{{item.name}}</option>
+             </select>
+        </div>
+    </div>
     <button class="btn btn-primary btn-block">Actualizar usuario</button>
 </form>

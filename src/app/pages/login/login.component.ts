@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/interfaces/UserInterface';
 import {NgForm} from '@angular/forms';
 import { UserService } from 'src/app/services/user/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,17 +11,17 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  user: User = new User;
+  user: User = new User();
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
   doLogin(f: NgForm) {
-    console.log("Login Called");
-    console.log("The username is: " + f.value.username);
-    console.log("The password is: "+ f.value.password);
 
     this.user.username = f.value.username;
     this.user.password = f.value.password;
@@ -31,11 +32,13 @@ export class LoginComponent implements OnInit {
         this.user.firstName = response.firstName;
         this.user.lastName = response.lastName;
         this.user.username = response.username;
+        this.user.rolId = response.rol.id;
+        this.user.rol = response.rol;
         this.userService.setLogIn(this.user);
       }, error => {
         console.log(error);
       }
-    )
+    );
   }
 
 }

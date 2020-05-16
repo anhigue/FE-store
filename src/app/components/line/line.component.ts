@@ -30,17 +30,12 @@ export class LineComponent implements OnInit {
 
   private getLine(): void {
     try {
-      /* descomenta estas lineas cuando termines de agregar las rutas */
-      /* this._LINE_SERVICE.readLine().subscribe( (value: LineInterface[]) => {
+      this._LINE_SERVICE.readLine().subscribe( (value: LineInterface[]) => {
         if (value) {
           this.line = value;
           this.dataSource = new MatTableDataSource<LineInterface>(this.line);
           this.dataSource.paginator = this.paginator;
         }
-      }); */
-      this.line.push({
-        id: 1,
-        name: 'Escape'
       });
       this.dataSource = new MatTableDataSource<LineInterface>(this.line);
       this.dataSource.paginator = this.paginator;

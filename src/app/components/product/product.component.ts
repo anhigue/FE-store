@@ -23,6 +23,7 @@ export class ProductComponent implements OnInit {
     'partNo',
     'price',
     'stock',
+    'factory',
     'options'
   ];
   products: ProductInterface[] = [];
@@ -47,18 +48,6 @@ export class ProductComponent implements OnInit {
           this.dataSource = new MatTableDataSource<ProductInterface>(this.products);
           this.dataSource.paginator = this.paginator;
         }
-      });
-      this.products.push({
-        id: 1,
-        name: 'Anibal Higueros',
-        vehicles: [
-          {
-            universalCode: 'AADDSSkS',
-            brand: 'Ford',
-            line: 'Escape',
-            year: 2002
-          }
-        ]
       });
       this.dataSource = new MatTableDataSource<ProductInterface>(this.products);
       this.dataSource.paginator = this.paginator;
@@ -88,6 +77,8 @@ export class ProductComponent implements OnInit {
         .beforeClosed()
         .subscribe((value: ProductInterface) => {
           if (value) {
+            value.fabricId = value.fabric.id;
+            value.fabric = null;
             this.createProduct(value);
           }
         });
@@ -117,6 +108,8 @@ export class ProductComponent implements OnInit {
         .beforeClosed()
         .subscribe((value: ProductInterface) => {
           if (value) {
+            value.fabricId = value.fabric.id;
+            value.fabric = null;
             this.updateProduct(value);
           }
         });
@@ -218,13 +211,15 @@ export class ProductComponent implements OnInit {
           if (value.type === 'delete') {
             const deleteVehicle = {
               id: product.id,
-              universalCode: value.data.universalCode
+              universalCode: value.data.universalCode,
+              fabricId: null
             };
             this.UnAssignVehicle(deleteVehicle);
           } else if (value.type === 'assign') {
             const assignVehicle = {
               id: product.id,
-              universalCode: value.data.universalCode
+              universalCode: value.data.universalCode,
+              fabricId: null
             };
             this.assignVehicle(assignVehicle);
           }

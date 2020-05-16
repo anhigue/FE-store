@@ -42,9 +42,18 @@ export interface SaleInterface {
   clientId?: number;
   statusId?: number;
   orderId?: number;
-  status?: StateInterface;
+  orderState?: StateInterface;
   client?: ClientInterface;
-  productOrder?: SaleProductInterface[];
+  productSale?: SaleProductInterface[];
   order?: OrderInterface;
+  isCredit?: boolean;
 }
 
+/* credit interface */
+export interface CreditSaleInterface {
+  id?: number;
+  saleId?: number;
+  clientId?: number;
+  sale?: SaleInterface;
+  client?: ClientInterface;
+}

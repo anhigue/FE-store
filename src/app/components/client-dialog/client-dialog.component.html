@@ -35,11 +35,15 @@
             formControlName="image" />
         </mat-form-field>
       </div>
-    </div>
-    <div class="row">
       <div class="col-md-12">
-        <input matInput placeholder="Suscripcion" type="number" required [(ngModel)]="clientUpdate.subscriptionId"
-            formControlName="subscription" />
+        <mat-form-field>
+          <mat-label>Subscripcion</mat-label>
+          <mat-select formControlName="subscription" required [(ngModel)]="clientUpdate.subscriptionId">
+            <mat-option *ngFor="let item of subscriptions" [value]="item.id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
     </div>
   </form>

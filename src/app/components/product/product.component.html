@@ -33,6 +33,11 @@
           <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="factory">
+          <th mat-header-cell *matHeaderCellDef> Fabrica </th>
+          <td mat-cell *matCellDef="let element"> {{element.fabric.name}} </td>
+        </ng-container>
+
         <ng-container matColumnDef="options">
           <th mat-header-cell *matHeaderCellDef> Opciones </th>
           <td mat-cell *matCellDef="let element">

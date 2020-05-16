@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {
   SaleInterface,
-  SaleProductInterface
+  SaleProductInterface,
+  OrderInterface,
 } from '../../../interfaces/SaleInterface';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { OrderInterface, OrderProductInterface } from '../../../interfaces/SaleInterface';
-
+import { CreditSaleInterface } from '../../../interfaces/SaleInterface';
+import { ClientInterface } from 'src/interfaces/ClientInterface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SalesService {
   private headers: HttpHeaders;
@@ -22,45 +23,101 @@ export class SalesService {
     );
   }
 
-  newSale(sale: SaleInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', sale, {
+  checkAvailableSale(clientId: number): Observable<boolean> {
+    return this.http.get<boolean>(environment.API_BASE + '/sale/client/available/' + clientId, {
       headers: this.headers
+    });
+  }
+
+  newSale(sale: SaleInterface): Observable<any> {
+    return this.http.post<any>(environment.API_BASE + '/sale', sale, {
+      headers: this.headers,
     });
   }
 
   newOrder(order: OrderInterface): Observable<any> {
-    return this.http.post<any>(environment.API_BASE + '', order, {
-      headers: this.headers
+    return this.http.post<any>(environment.API_BASE + '/request', order, {
+      headers: this.headers,
     });
   }
 
   readSale(): Observable<SaleInterface[]> {
-    return this.http.get<SaleInterface[]>(environment.API_BASE + '', {
-      headers: this.headers
+    return this.http.get<SaleInterface[]>(environment.API_BASE + '/sale', {
+      headers: this.headers,
     });
   }
 
   updateSale(sale: SaleInterface): Observable<any> {
-    return this.http.put(environment.API_BASE + '', sale, {
-      headers: this.headers
+    return this.http.put(environment.API_BASE + '/request', sale, {
+      headers: this.headers,
     });
   }
 
   deleteSale(sale: SaleInterface): Observable<any> {
     return this.http.delete(environment.API_BASE + '' + sale.id, {
-      headers: this.headers
+      headers: this.headers,
     });
   }
 
-  public assignProductSale(product: SaleProductInterface): Observable<any> {
+  assignProductSale(product: SaleProductInterface): Observable<any> {
     return this.http.post<any>(environment.API_BASE + '', product, {
-      headers: this.headers
+      headers: this.headers,
     });
   }
 
-  public assignProductOrder(productOrder: SaleProductInterface): Observable<any> {
+  assignProductOrder(productOrder: SaleProductInterface): Observable<any> {
     return this.http.post<any>(environment.API_BASE + '', productOrder, {
-      headers: this.headers
+      headers: this.headers,
     });
+  }
+
+  readOrder(): Observable<OrderInterface[]> {
+    return this.http.get<OrderInterface[]>(environment.API_BASE + '/request', {
+      headers: this.headers,
+    });
+  }
+
+  updateStateOrder(order: OrderInterface, state: number): Observable<any> {
+    return this.http.put<any>(
+      environment.API_BASE + '',
+      { order, state },
+      { headers: this.headers }
+    );
+  }
+
+  receibeRequest(order: OrderInterface, state: number): Observable<any> {
+    return this.http.put<any>(
+      environment.API_BASE + '/request/receive/' + order.id,
+      { order, state },
+      { headers: this.headers }
+    );
+  }
+
+  cancelRequest(order: OrderInterface, state: number): Observable<any> {
+    return this.http.put<any>(
+      environment.API_BASE + '/request/cancel/' + order.id,
+      { order, state },
+      { headers: this.headers }
+    );
+  }
+
+  updateStateSale(sale: SaleInterface, state: number): Observable<any> {
+    return this.http.put<any>(
+      environment.API_BASE + '',
+      { sale, state },
+      { headers: this.headers }
+    );
+  }
+
+  deliverSale(sale: SaleInterface): Observable<any> {
+    return this.http.put<any>(environment.API_BASE + '/sale/deliver/' + sale.id, {headers: this.headers});
+  }
+
+  readCreditSales(): Observable<CreditSaleInterface[]> {
+    return this.http.get<any[]>(environment.API_BASE + '/sale/credit', { headers: this.headers });
+  }
+
+  payCreditSale(creditSale: CreditSaleInterface): Observable<any> {
+    return this.http.delete<any>(environment.API_BASE + '/sale/credit/' + creditSale.id, { headers: this.headers });
   }
 }

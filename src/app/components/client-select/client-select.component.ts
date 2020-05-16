@@ -47,8 +47,9 @@ export class ClientSelectOrderComponent implements OnInit {
         image: '',
         nit: '99405636',
         phone: '33363042',
+        subscriptionId: 2,
         subscription: {
-          id: 1,
+          id: 2,
           name: 'Mayorista',
           discount: 20
         }

@@ -32,7 +32,7 @@ export class UserService {
 
   setLogIn(User: User): void {
     this.cookieService.set(environment.USER_KEY, JSON.stringify(User));
-    this.route.navigateByUrl('home');
+    this.route.navigateByUrl('home/sales');
   }
 
   IsLogged(): boolean {
@@ -51,7 +51,7 @@ export class UserService {
   }
 
   Logout(): void {
-    this.cookieService.delete(environment.USER_KEY);
+    this.cookieService.delete(environment.USER_KEY, '/');
     this.route.navigateByUrl('/login');
   }
 

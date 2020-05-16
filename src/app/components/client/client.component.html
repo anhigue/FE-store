@@ -38,6 +38,7 @@
           <td mat-cell *matCellDef="let element">
             <mat-menu #appMenuCoin="matMenu">
               <ng-template matMenuContent>
+                <button mat-menu-item (click)="wantRenovateSubscription(element);" >Renovar Subscripción</button>
                 <button mat-menu-item (click)="wantUpdate(element);" >Editar</button>
                 <button mat-menu-item (click)="wantDelete(element);">Eliminar</button>
               </ng-template>
