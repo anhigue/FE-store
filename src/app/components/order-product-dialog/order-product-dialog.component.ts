@@ -88,29 +88,6 @@ export class OrderProductDialogComponent implements OnInit {
             this.dataSource.sort = this.sort;
           }
         });
-      this.products.push({
-        id: 1,
-        name: 'Bujia',
-        price: 200,
-        stock: 40,
-        vehicles: [],
-      });
-      this.products.push({
-        id: 2,
-        name: 'Punta de flecha',
-        price: 2000,
-        vehicles: [
-          {
-            universalCode: 'AADDSSkS',
-            brand: {},
-            line: {},
-            year: 2002,
-            brandId: 1,
-            lineId: 1,
-          },
-        ],
-        stock: 4,
-      });
       this.dataSource = new MatTableDataSource<ProductInterface>(this.products);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;

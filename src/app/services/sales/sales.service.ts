@@ -109,6 +109,10 @@ export class SalesService {
     );
   }
 
+  deliverSale(sale: SaleInterface): Observable<any> {
+    return this.http.put<any>(environment.API_BASE + '/sale/deliver/' + sale.id, {headers: this.headers});
+  }
+
   readCreditSales(): Observable<CreditSaleInterface[]> {
     return this.http.get<any[]>(environment.API_BASE + '/sale/credit', { headers: this.headers });
   }

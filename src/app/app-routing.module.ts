@@ -14,12 +14,14 @@ import { SalesComponent } from './pages/home/sales/sales.component';
 import { CreateComponent } from './pages/home/catalogue-user/create/create.component';
 import { UpdateUserComponent } from './pages/home/catalogue-user/update-user/update-user.component';
 import { AdminBillComponent } from './pages/home/admin-bill/admin-bill.component';
+import { AdminGuard } from './guard/admin.guard';
+import { SellerGuard } from './guard/seller.guard';
 
 const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    /* canActivate: [ UserInGuard ] */
+    canActivate: [ UserInGuard ]
   },
   {
     path: '',
@@ -29,57 +31,52 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    /* canActivate: [UserOutGuard], */
+    canActivate: [UserOutGuard],
     children: [
       {
         path: 'information',
         component: InformationComponent,
-        /* canActivate: [UserOutGuard] */
+        canActivate: [UserOutGuard, AdminGuard]
       },
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'information'
+        redirectTo: 'sales'
       },
       {
         path: 'setting',
         component: SettingsComponent,
-        /* canActivate: [UserOutGuard] */
+        canActivate: [UserOutGuard, AdminGuard]
       },
       {
         path: 'catalogue/cars',
         component: CatalogueCarsComponent,
-        /* canActivate: [UserOutGuard] */
+        canActivate: [UserOutGuard, AdminGuard] 
       },
       {
         path: 'catalogue/user',
         component: CatalogueUserComponent,
-        /* canActivate: [UserOutGuard] */
+        canActivate: [UserOutGuard, AdminGuard]
       },
       {
         path: 'catalogue/user/create',
         component: CreateComponent,
-        /* canActivate: [UserOutGuard] */
+        canActivate: [UserOutGuard, AdminGuard]
       },
       {
         path: 'catalogue/user/update/:id',
         component: UpdateUserComponent,
-        /* canActivate: [UserOutGuard] */
+        canActivate: [UserOutGuard, AdminGuard]
       },
       {
         path: 'catalogue/part',
         component: CataloguePartsComponent,
-        /* canActivate: [UserOutGuard] */
+        canActivate: [UserOutGuard, SellerGuard]
       },
       {
         path: 'sales',
         component: SalesComponent,
-        /* canActivate: [UserOutGuard] */
-      },
-      {
-        path: 'bill',
-        component: AdminBillComponent,
-        /* canActivate: [UserOutGuard] */
+        canActivate: [UserOutGuard, SellerGuard]
       },
       {
         path: '**',
